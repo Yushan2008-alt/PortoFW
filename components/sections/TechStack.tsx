@@ -10,18 +10,17 @@ const CATEGORIES: { key: TechItem['category']; label: string }[] = [
   { key: 'tools',    label: 'Tools & Deploy' },
 ];
 
+// FIX 7 — Add tech-pill-hover class; keep state only for tooltip
 function TechChip({ item }: { item: TechItem }) {
   const [hovered, setHovered] = useState(false);
 
   return (
     <span
-      className="relative px-4 py-2 rounded-full text-sm font-medium cursor-default transition-all duration-200 select-none"
+      className="tech-pill-hover relative px-4 py-2 rounded-full text-sm font-medium cursor-default transition-all duration-200 select-none"
       style={{
         background: 'var(--bg-card)',
-        border: `1px solid ${hovered ? 'var(--blewah)' : 'var(--border-subtle)'}`,
-        color: hovered ? 'var(--blewah)' : 'var(--text-secondary)',
-        boxShadow: hovered ? 'var(--shadow-blewah)' : 'none',
-        transform: hovered ? 'scale(1.05)' : 'scale(1)',
+        border: '1px solid var(--border-subtle)',
+        color: 'var(--text-secondary)',
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}

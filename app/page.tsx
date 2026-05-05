@@ -13,10 +13,15 @@ export default function HomePage() {
       <Navbar />
       <main>
         <Hero />
+        <div className="gradient-divider" />
         <About />
+        <div className="gradient-divider" />
         <Work />
+        <div className="gradient-divider" />
         <Services />
+        <div className="gradient-divider" />
         <TechStack />
+        <div className="gradient-divider" />
         <Contact />
       </main>
       <Footer />

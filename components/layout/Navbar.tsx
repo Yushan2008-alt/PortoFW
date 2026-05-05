@@ -1,7 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import { site } from '@/data/site';
 import { Button } from '@/components/ui/Button';
 
 const NAV_LINKS = [
@@ -38,13 +37,12 @@ export function Navbar() {
       >
         <div className="mx-auto flex items-center justify-between px-6 md:px-10" style={{ maxWidth: 1200, height: 72 }}>
 
-          {/* Logo */}
-          <a
-            href="#hero"
-            className="font-bold text-xl"
-            style={{ fontFamily: 'var(--font-syne, sans-serif)', color: 'var(--text-primary)' }}
-          >
-            {site.name}
+          {/* FIX 4E — Logo: "Forza" gradient, "Studio" dark */}
+          <a href="#hero" className="flex items-center">
+            <span style={{ fontFamily: 'var(--font-syne, sans-serif)', fontSize: '1.25rem', fontWeight: 700 }}>
+              <span className="gradient-text">Forza</span>
+              <span style={{ color: 'var(--text-primary)' }}> Studio</span>
+            </span>
           </a>
 
           {/* Desktop nav */}

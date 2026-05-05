@@ -1,4 +1,5 @@
 'use client';
+import { motion } from 'framer-motion';
 
 interface ButtonProps {
   variant: 'primary' | 'secondary' | 'ghost';
@@ -16,33 +17,34 @@ const SIZE_CLASSES = {
   lg: 'py-4 px-8 text-lg',
 };
 
-const BASE = 'inline-flex items-center gap-2 font-medium rounded-xl transition-all duration-200 cursor-pointer';
+const BASE = 'inline-flex items-center gap-2 font-medium rounded-xl cursor-pointer';
 
+// FIX 6 — Primary: motion.span with blewah glow + whileHover/whileTap
 function PrimaryButton({ size, icon, children, className }: Omit<ButtonProps, 'variant'>) {
   return (
-    <span
-      className={`${BASE} ${SIZE_CLASSES[size ?? 'md']} text-white hover:scale-[1.02] ${className ?? ''}`}
+    <motion.span
+      className={`${BASE} ${SIZE_CLASSES[size ?? 'md']} text-white ${className ?? ''}`}
       style={{
         background: 'var(--blewah)',
-        boxShadow: 'var(--shadow-sm)',
+        boxShadow: '0 0 20px rgba(232,151,106,0.30), 0 4px 12px rgba(232,151,106,0.15)',
       }}
-      onMouseEnter={e => {
-        (e.currentTarget as HTMLElement).style.boxShadow = 'var(--shadow-blewah)';
+      whileHover={{
+        boxShadow: '0 0 36px rgba(232,151,106,0.55), 0 8px 24px rgba(232,151,106,0.25)',
+        scale: 1.03,
       }}
-      onMouseLeave={e => {
-        (e.currentTarget as HTMLElement).style.boxShadow = 'var(--shadow-sm)';
-      }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ duration: 0.2 }}
     >
       {children}
       {icon}
-    </span>
+    </motion.span>
   );
 }
 
 function SecondaryButton({ size, icon, children, className }: Omit<ButtonProps, 'variant'>) {
   return (
     <span
-      className={`${BASE} ${SIZE_CLASSES[size ?? 'md']} ${className ?? ''}`}
+      className={`${BASE} transition-all duration-200 ${SIZE_CLASSES[size ?? 'md']} ${className ?? ''}`}
       style={{
         background: 'linear-gradient(var(--bg-primary), var(--bg-primary)) padding-box, var(--gradient-gemini) border-box',
         border: '1.5px solid transparent',
@@ -70,14 +72,10 @@ function SecondaryButton({ size, icon, children, className }: Omit<ButtonProps, 
 function GhostButton({ size, icon, children, className }: Omit<ButtonProps, 'variant'>) {
   return (
     <span
-      className={`${BASE} ${SIZE_CLASSES[size ?? 'md']} relative group ${className ?? ''}`}
+      className={`${BASE} transition-all duration-200 ${SIZE_CLASSES[size ?? 'md']} relative group ${className ?? ''}`}
       style={{ color: 'var(--text-secondary)' }}
-      onMouseEnter={e => {
-        (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)';
-      }}
-      onMouseLeave={e => {
-        (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)';
-      }}
+      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)'; }}
+      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'; }}
     >
       <span className="relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-current after:transition-all after:duration-200 group-hover:after:w-full">
         {children}

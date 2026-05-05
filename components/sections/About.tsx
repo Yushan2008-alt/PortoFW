@@ -2,67 +2,39 @@
 import { useEffect, useRef, useState } from 'react';
 import { useInView } from 'framer-motion';
 import { team } from '@/data/team';
-import { site } from '@/data/site';
 import { SmartImage } from '@/components/ui/SmartImage';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 
-const STAT_LABELS: Record<string, string> = {
-  projects: 'Projects Built',
-  clients:  'Happy Clients',
-  years:    'Years Together',
-};
-
-function parseCount(value: string): { num: number; suffix: string } {
-  const match = value.match(/^(\d+)(.*)$/);
-  return match ? { num: parseInt(match[1], 10), suffix: match[2] } : { num: 0, suffix: '' };
-}
-
-function StatCounter({ value, label }: { value: string; label: string }) {
-  const { num, suffix } = parseCount(value);
+// FIX 1: CountUp with ref directly on the span — not wrapped in ScrollReveal
+function CountUp({ target, suffix = '+' }: { target: number; suffix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-80px' });
   const [count, setCount] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-60px' });
 
   useEffect(() => {
-    if (!inView) return;
-    if (num === 0) return;
-
-    const duration = 1200;
-    const steps = 40;
-    const increment = num / steps;
-    const interval = duration / steps;
+    if (!isInView) return;
     let current = 0;
-
+    const increment = target / 45;
     const timer = setInterval(() => {
       current += increment;
-      if (current >= num) {
-        setCount(num);
+      if (current >= target) {
+        setCount(target);
         clearInterval(timer);
       } else {
         setCount(Math.floor(current));
       }
-    }, interval);
-
+    }, 28);
     return () => clearInterval(timer);
-  }, [inView, num]);
+  }, [isInView, target]);
 
-  return (
-    <div ref={ref} className="flex flex-col">
-      <span
-        className="font-bold text-2xl md:text-4xl gradient-text"
-        style={{ fontFamily: 'var(--font-syne, sans-serif)' }}
-      >
-        {count}{suffix}
-      </span>
-      <span
-        className="text-[10px] md:text-xs uppercase tracking-wide mt-1 leading-tight"
-        style={{ color: 'var(--text-muted)' }}
-      >
-        {label}
-      </span>
-    </div>
-  );
+  return <span ref={ref}>{count}{suffix}</span>;
 }
+
+const STATS = [
+  { label: 'Projects Built', target: 15, suffix: '+' },
+  { label: 'Happy Clients',  target: 10, suffix: '+' },
+  { label: 'Years Together', target: 2,  suffix: ''  },
+];
 
 export function About() {
   return (
@@ -75,7 +47,7 @@ export function About() {
 
         {/* Left column — visuals */}
         <div className="relative h-72 sm:h-80 md:h-96 overflow-visible">
-          {/* Decorative blob behind avatars */}
+          {/* Decorative blob */}
           <div
             className="absolute inset-0"
             style={{
@@ -87,7 +59,7 @@ export function About() {
             }}
           />
 
-          {/* Avatar 1 — team[0], bottom-left */}
+          {/* Avatar 1 — bottom-left */}
           <div
             className="absolute bottom-0 left-0 rounded-2xl overflow-hidden"
             style={{
@@ -108,7 +80,7 @@ export function About() {
             />
           </div>
 
-          {/* Avatar 2 — team[1], top-right */}
+          {/* Avatar 2 — top-right */}
           <div
             className="absolute top-0 right-0 rounded-2xl overflow-hidden"
             style={{
@@ -130,40 +102,50 @@ export function About() {
           </div>
         </div>
 
-        {/* Right column — text */}
-        <ScrollReveal direction="left">
-          <span
-            className="gradient-text text-sm font-semibold tracking-widest uppercase"
-          >
-            Who We Are
-          </span>
+        {/* Right column — text + stats */}
+        <div>
+          {/* Text content wrapped in ScrollReveal */}
+          <ScrollReveal direction="left">
+            <span className="gradient-text text-sm font-semibold tracking-widest uppercase">
+              Who We Are
+            </span>
 
-          <h2
-            className="mt-3 font-bold leading-tight text-4xl md:text-5xl"
-            style={{ fontFamily: 'var(--font-syne, sans-serif)', color: 'var(--text-primary)' }}
-          >
-            Dua Kepala. Satu Visi.
-          </h2>
+            <h2
+              className="mt-3 font-bold leading-tight text-4xl md:text-5xl"
+              style={{ fontFamily: 'var(--font-syne, sans-serif)', color: 'var(--text-primary)' }}
+            >
+              Dua Kepala. Satu Visi.
+            </h2>
 
-          <p
-            className="mt-6 text-base leading-relaxed max-w-md"
-            style={{ color: 'var(--text-secondary)' }}
-          >
-            Kami adalah tim kecil yang bergerak cepat. Setiap project kami tangani dari A sampai Z,
-            dengan standar yang sama seperti tim in-house.
-          </p>
+            <p
+              className="mt-6 text-base leading-relaxed max-w-md"
+              style={{ color: 'var(--text-secondary)' }}
+            >
+              Kami adalah tim kecil yang bergerak cepat. Setiap project kami tangani dari A sampai Z,
+              dengan standar yang sama seperti tim in-house.
+            </p>
+          </ScrollReveal>
 
-          {/* Stat counters */}
+          {/* Stat counters — NO ScrollReveal wrapper so useInView triggers correctly */}
           <div className="mt-10 grid grid-cols-3 gap-3 md:gap-6">
-            {(Object.keys(site.stats) as Array<keyof typeof site.stats>).map((key) => (
-              <StatCounter
-                key={key}
-                value={site.stats[key]}
-                label={STAT_LABELS[key]}
-              />
+            {STATS.map(({ label, target, suffix }) => (
+              <div key={label} className="flex flex-col">
+                <span
+                  className="font-bold text-2xl md:text-4xl gradient-text"
+                  style={{ fontFamily: 'var(--font-syne, sans-serif)' }}
+                >
+                  <CountUp target={target} suffix={suffix} />
+                </span>
+                <span
+                  className="text-[10px] md:text-xs uppercase tracking-wide mt-1 leading-tight"
+                  style={{ color: 'var(--text-muted)' }}
+                >
+                  {label}
+                </span>
+              </div>
             ))}
           </div>
-        </ScrollReveal>
+        </div>
 
       </div>
     </section>
