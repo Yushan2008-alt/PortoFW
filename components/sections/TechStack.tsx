@@ -57,8 +57,12 @@ export function TechStack() {
               Tech Stack
             </span>
             <h2
-              className="mt-3 font-bold text-4xl md:text-5xl"
-              style={{ fontFamily: 'var(--font-syne, sans-serif)', color: 'var(--text-primary)' }}
+              className="mt-3 font-display font-bold"
+              style={{
+                fontSize: 'clamp(1.75rem, 4.5vw, 3rem)',
+                letterSpacing: '-0.02em',
+                color: 'var(--text-primary)',
+              }}
             >
               Tools yang Kami Kuasai
             </h2>

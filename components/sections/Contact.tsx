@@ -10,6 +10,7 @@ type Status = 'idle' | 'loading' | 'success' | 'error';
 const inputBase: React.CSSProperties = {
   width: '100%',
   padding: '12px 16px',
+  minHeight: 48,
   borderRadius: 12,
   background: 'var(--bg-card)',
   border: '1px solid var(--border-medium)',
@@ -89,8 +90,12 @@ export function Contact() {
           <Badge variant="blewah">Let&apos;s Work Together ✦</Badge>
 
           <h2
-            className="mt-4 font-bold text-4xl md:text-5xl"
-            style={{ fontFamily: 'var(--font-syne, sans-serif)', color: 'var(--text-primary)' }}
+            className="mt-4 font-display font-bold"
+            style={{
+              fontSize: 'clamp(1.75rem, 4.5vw, 3rem)',
+              letterSpacing: '-0.02em',
+              color: 'var(--text-primary)',
+            }}
           >
             Punya Project yang Menarik?
           </h2>

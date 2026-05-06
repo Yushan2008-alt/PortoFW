@@ -80,9 +80,10 @@ export function Services() {
               What We Do
             </span>
             <h2
-              className="mt-3 font-bold text-4xl md:text-5xl"
+              className="mt-3 font-display font-bold"
               style={{
-                fontFamily: 'var(--font-syne, sans-serif)',
+                fontSize: 'clamp(1.75rem, 4.5vw, 3rem)',
+                letterSpacing: '-0.02em',
                 color: 'var(--text-on-dark)',
               }}
             >
@@ -92,7 +93,7 @@ export function Services() {
         </div>
 
         {/* Cards grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
           {services.map((service, index) => (
             <ServiceCard key={service.id} service={service} delay={index * 0.1} />
           ))}

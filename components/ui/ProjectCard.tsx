@@ -1,130 +1,80 @@
 'use client';
-import { motion } from 'framer-motion';
-import { ExternalLink, Github } from 'lucide-react';
-import type { Project } from '@/data/projects';
+import { Project } from '@/data/projects';
 import { SmartImage } from './SmartImage';
-import { Badge } from './Badge';
+import { motion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
 
 interface ProjectCardProps {
   project: Project;
   index: number;
+  onClick: () => void;
 }
 
-export function ProjectCard({ project, index }: ProjectCardProps) {
-  // FIX 5 — Magnetic tilt handlers
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 10;
-    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 10;
-    e.currentTarget.style.transform =
-      `perspective(1200px) rotateX(${-y}deg) rotateY(${x}deg) translateY(-5px)`;
-    e.currentTarget.style.transition = 'transform 0.1s ease';
-  };
-
-  const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.currentTarget.style.transform =
-      'perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0)';
-    e.currentTarget.style.transition = 'transform 0.4s ease';
-  };
-
+export function ProjectCard({ project, index, onClick }: ProjectCardProps) {
   return (
-    // Outer motion.div: handles stagger entry only, no whileHover
-    <motion.div
+    <motion.button
+      layoutId={`project-card-${project.id}`}
+      onClick={onClick}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ delay: index * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      whileHover={{ y: -4 }}
+      className="group relative w-full text-left rounded-2xl overflow-hidden border transition-all duration-300 cursor-pointer"
+      style={{ background: 'var(--bg-card)', borderColor: 'var(--border-subtle)' }}
     >
-      {/* Inner div: handles magnetic hover + gradient border */}
-      <div
-        className="gradient-border-hover rounded-[20px] overflow-hidden flex flex-col h-full"
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
+      {/* Image — 4:3 aspect ratio */}
+      <motion.div
+        layoutId={`project-image-${project.id}`}
+        className="relative w-full overflow-hidden"
+        style={{ aspectRatio: '4 / 3' }}
       >
-        {/* Image area */}
-        <div className="relative overflow-hidden" style={{ aspectRatio: '16/10' }}>
-          <motion.div
-            className="w-full h-full"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.4, ease: 'easeOut' }}
-          >
-            <SmartImage
-              src={project.thumbnail}
-              alt={project.title}
-              fallbackText={project.title}
-              fallbackBg="gemini"
-              width={800}
-              height={500}
-              className="w-full h-full object-cover"
-            />
-          </motion.div>
+        <SmartImage
+          src={project.thumbnail}
+          alt={project.title}
+          fallbackText={project.title}
+          width={600}
+          height={450}
+          fallbackBg="gemini"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        {/* Subtle overlay on hover */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+        {/* Click hint icon */}
+        <div
+          className="absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0"
+          style={{ background: 'var(--blewah)' }}
+        >
+          <ArrowUpRight size={16} color="white" />
         </div>
+      </motion.div>
 
-        {/* Content area */}
-        <div className="p-6 flex flex-col flex-1" style={{ background: 'var(--bg-card)' }}>
-          <Badge variant="default" className="mb-3 self-start">
-            {project.category}
-          </Badge>
+      {/* Content — tight padding */}
+      <div className="p-4 md:p-5">
+        <motion.div
+          layoutId={`project-category-${project.id}`}
+          className="font-medium tracking-wide mb-2"
+          style={{ color: 'var(--blewah)', fontSize: 'clamp(0.65rem, 1vw, 0.75rem)' }}
+        >
+          {project.category}
+        </motion.div>
 
-          <h3
-            className="text-xl font-semibold"
-            style={{ fontFamily: 'var(--font-syne, sans-serif)', color: 'var(--text-primary)' }}
-          >
-            {project.title}
-          </h3>
+        <motion.h3
+          layoutId={`project-title-${project.id}`}
+          className="font-display font-bold mb-2"
+          style={{ fontSize: 'clamp(1rem, 1.8vw, 1.25rem)', letterSpacing: '-0.01em', color: 'var(--text-primary)' }}
+        >
+          {project.title}
+        </motion.h3>
 
-          <p
-            className="text-sm mt-2 line-clamp-2"
-            style={{ color: 'var(--text-secondary)' }}
-          >
-            {project.tagline}
-          </p>
-
-          {/* Tech stack chips */}
-          <div className="mt-4 flex flex-wrap gap-2">
-            {project.techStack.map((tech) => (
-              <span
-                key={tech}
-                className="px-3 py-1 text-xs rounded-full"
-                style={{
-                  background: 'var(--bg-secondary)',
-                  color: 'var(--text-muted)',
-                }}
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-
-          {/* Links */}
-          <div className="mt-4 flex gap-3 items-center">
-            {project.liveUrl && (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-sm hover:underline"
-                style={{ color: 'var(--gemini-purple)' }}
-              >
-                <ExternalLink size={14} />
-                Live →
-              </a>
-            )}
-            {project.repoUrl && (
-              <a
-                href={project.repoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-sm hover:underline"
-                style={{ color: 'var(--text-muted)' }}
-              >
-                <Github size={14} />
-                Repo
-              </a>
-            )}
-          </div>
-        </div>
+        <p
+          className="leading-relaxed line-clamp-2"
+          style={{ fontSize: 'clamp(0.75rem, 1.1vw, 0.85rem)', color: 'var(--text-secondary)' }}
+        >
+          {project.tagline}
+        </p>
       </div>
-    </motion.div>
+    </motion.button>
   );
 }

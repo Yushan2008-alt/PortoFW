@@ -63,16 +63,11 @@ export function Hero() {
           animate="show"
           className="flex flex-col items-center"
         >
-          {/* FIX 4B — Radial glow behind H1 */}
+          {/* FIX 6D — Radial glow, inset-0 */}
           <div
-            className="absolute pointer-events-none"
+            className="absolute pointer-events-none inset-0"
             style={{
-              top: '20%',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              width: '70%',
-              height: '50%',
-              background: 'radial-gradient(ellipse at center, rgba(155,109,255,0.10) 0%, transparent 70%)',
+              background: 'radial-gradient(ellipse 60% 40% at 50% 35%, rgba(155,109,255,0.12) 0%, transparent 70%)',
               zIndex: 0,
             }}
           />
@@ -82,14 +77,14 @@ export function Hero() {
             <Badge variant="blewah">Available for Projects ✦</Badge>
           </motion.div>
 
-          {/* 2. Headline — FIX 4C: lg:text-8xl, letterSpacing, leading-none */}
+          {/* 2. Headline — FIX 6A: fluid clamp typography */}
           <motion.h1
             variants={itemVariants}
-            className="relative z-10 mt-6 font-bold leading-none text-4xl sm:text-5xl md:text-7xl lg:text-8xl"
+            className="relative z-10 mt-6 font-display font-bold leading-[0.95]"
             style={{
-              fontFamily: 'var(--font-syne, sans-serif)',
+              fontSize: 'clamp(2.5rem, 8vw, 5.5rem)',
+              letterSpacing: '-0.03em',
               color: 'var(--text-primary)',
-              letterSpacing: '-0.025em',
             }}
           >
             We Build Digital
@@ -97,11 +92,11 @@ export function Hero() {
             <span className="gradient-text">Products That Move.</span>
           </motion.h1>
 
-          {/* 3. Subtext */}
+          {/* 3. Subtext — FIX 6B: fluid clamp */}
           <motion.p
             variants={itemVariants}
-            className="relative z-10 mt-6 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto"
-            style={{ color: 'var(--text-secondary)' }}
+            className="relative z-10 mt-6 leading-relaxed max-w-2xl mx-auto"
+            style={{ fontSize: 'clamp(1rem, 1.8vw, 1.25rem)', color: 'var(--text-secondary)' }}
           >
             Tim 2 developer yang fokus pada hasil nyata. Dari desain ke produksi, kami tangani semuanya.
           </motion.p>
