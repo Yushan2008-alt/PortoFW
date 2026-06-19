@@ -1,12 +1,11 @@
 'use client';
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { projects, Project } from '@/data/projects';
 import { ProjectCard } from '@/components/ui/ProjectCard';
-import { ProjectModal } from '@/components/ui/ProjectModal';
 import { motion } from 'framer-motion';
 
 export function Work() {
-  const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const router = useRouter();
 
   return (
     <section
@@ -28,7 +27,7 @@ export function Work() {
           <h2
             className="font-display font-bold mt-3 leading-tight"
             style={{
-              fontSize: 'clamp(1.75rem, 4.5vw, 3rem)',
+              fontSize: 'clamp(1.4rem, 4vw, 2.5rem)',
               letterSpacing: '-0.02em',
               color: 'var(--text-primary)',
             }}
@@ -37,7 +36,7 @@ export function Work() {
           </h2>
           <p
             className="mt-4 max-w-xl mx-auto"
-            style={{ fontSize: 'clamp(0.9rem, 1.4vw, 1rem)', color: 'var(--text-secondary)' }}
+            style={{ fontSize: 'clamp(0.85rem, 1.3vw, 1rem)', color: 'var(--text-secondary)' }}
           >
             Klik salah satu untuk lihat detailnya. Dari MVP sampai production.
           </p>
@@ -50,16 +49,11 @@ export function Work() {
               key={p.id}
               project={p}
               index={i}
-              onClick={() => setActiveProject(p)}
+              onClick={() => router.push(`/projects/${p.id}`)}
             />
           ))}
         </div>
       </div>
-
-      <ProjectModal
-        project={activeProject}
-        onClose={() => setActiveProject(null)}
-      />
     </section>
   );
 }

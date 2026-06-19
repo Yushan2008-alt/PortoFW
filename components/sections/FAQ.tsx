@@ -65,7 +65,7 @@ export function FAQ() {
           <h2
             className="mt-3 font-display font-bold"
             style={{
-              fontSize: 'clamp(1.75rem, 4.5vw, 3rem)',
+              fontSize: 'clamp(1.4rem, 4vw, 2.5rem)',
               letterSpacing: '-0.02em',
               color: 'var(--text-primary)',
             }}
@@ -76,7 +76,7 @@ export function FAQ() {
           <p
             className="mt-4 max-w-xl mx-auto leading-relaxed"
             style={{
-              fontSize: 'clamp(0.9rem, 1.5vw, 1.05rem)',
+              fontSize: 'clamp(0.85rem, 1.3vw, 1rem)',
               color: 'var(--text-secondary)',
             }}
           >

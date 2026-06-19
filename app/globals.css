@@ -33,12 +33,14 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
+  overflow-x: hidden;
 }
 
 body {
   background: var(--bg-primary);
   color: var(--text-primary);
   font-family: var(--font-jakarta, sans-serif);
+  overflow-x: hidden;
 }
 
 /* === GRADIENT TEXT === */
@@ -174,12 +176,12 @@ body::before {
 /* === FLUID TYPOGRAPHY HELPERS === */
 .text-fluid-xs   { font-size: clamp(0.7rem, 1vw, 0.8rem); }
 .text-fluid-sm   { font-size: clamp(0.8rem, 1.2vw, 0.9rem); }
-.text-fluid-base { font-size: clamp(0.9rem, 1.5vw, 1.05rem); }
+.text-fluid-base { font-size: clamp(0.85rem, 1.4vw, 1rem); }
 .text-fluid-lg   { font-size: clamp(1rem, 1.8vw, 1.25rem); }
 .text-fluid-xl   { font-size: clamp(1.1rem, 2.2vw, 1.5rem); }
-.text-fluid-2xl  { font-size: clamp(1.5rem, 3.5vw, 2.25rem); }
-.text-fluid-3xl  { font-size: clamp(2rem, 5vw, 3.5rem); }
-.text-fluid-4xl  { font-size: clamp(2.5rem, 7vw, 5rem); }
+.text-fluid-2xl  { font-size: clamp(1.3rem, 3vw, 2rem); }
+.text-fluid-3xl  { font-size: clamp(1.6rem, 4.5vw, 3rem); }
+.text-fluid-4xl  { font-size: clamp(2rem, 6vw, 4.5rem); }
 
 /* === TICKER MARQUEE === */
 .ticker-track {
@@ -208,7 +210,7 @@ body::before {
 
 /* === MOBILE === */
 @media (max-width: 640px) {
-  body { font-size: 15px; }
+  body { font-size: 14px; }
 
   .animate-morph-blob {
     transform: scale(0.7) !important;

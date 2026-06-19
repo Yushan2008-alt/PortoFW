@@ -5,6 +5,7 @@ interface ButtonProps {
   variant: 'primary' | 'secondary' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   href?: string;
+  type?: 'button' | 'submit' | 'reset';
   onClick?: () => void;
   disabled?: boolean;
   children: React.ReactNode;
@@ -86,7 +87,9 @@ function GhostButton({ size, icon, children, className }: Omit<ButtonProps, 'var
   );
 }
 
-export function Button({ variant, size = 'md', href, onClick, disabled, children, icon, className }: ButtonProps) {
+import Link from 'next/link';
+
+export function Button({ variant, size = 'md', href, type = 'button', onClick, disabled, children, icon, className }: ButtonProps) {
   const isFullWidth = className?.includes('w-full');
   const outerCls = isFullWidth ? 'flex w-full' : 'inline-flex';
 
@@ -101,14 +104,15 @@ export function Button({ variant, size = 'md', href, onClick, disabled, children
 
   if (href) {
     return (
-      <a href={href} className={outerCls}>
+      <Link href={href} className={outerCls}>
         {inner}
-      </a>
+      </Link>
     );
   }
 
   return (
     <button
+      type={type}
       onClick={onClick}
       disabled={disabled}
       className={`${outerCls} bg-transparent border-0 p-0 disabled:opacity-60 disabled:pointer-events-none`}

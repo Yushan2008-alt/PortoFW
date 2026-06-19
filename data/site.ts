@@ -1,7 +1,3 @@
-export interface TickerItem {
-  value: string; // e.g. "15+ Projects Delivered"
-}
-
 export const site = {
   name: 'Forza Studio',
 
@@ -13,7 +9,7 @@ export const site = {
     'Forza Studio adalah web development agency yang membangun website profesional untuk UMKM dan korporat Indonesia.',
 
   url: 'https://forzastudio.dev',
-  email: 'hello@forzastudio.dev',
+  email: 'glarewardengroup@gmail.com',
 
   // SECURITY NOTE: disimpan tanpa karakter khusus — hanya digit.
   // Konstruksi URL WhatsApp: `https://wa.me/${site.whatsapp}`
@@ -28,20 +24,9 @@ export const site = {
   },
 
   stats: {
-    projects: '15+',
-    clients: '10+',
-    years: '2',
+    projects: '3',
+    clients: '0',
+    years: '1',
   },
 
-  // NEW: Metrics ticker items — digunakan oleh MetricsTicker component
-  tickerItems: [
-    { value: '15+ Projects Delivered' },
-    { value: '10+ Happy Clients' },
-    { value: '2 Years Experience' },
-    { value: 'Fast Turnaround' },
-    { value: 'Clean Code' },
-    { value: 'Results-Oriented' },
-    { value: 'Mobile-First Design' },
-    { value: '24-Hour Response Time' },
-  ] as TickerItem[],
 };

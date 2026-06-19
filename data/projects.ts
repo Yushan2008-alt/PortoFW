@@ -23,6 +23,16 @@ export interface Project {
   metrics?: ProjectMetric[];  // Up to 3 metric badges on card
   results?: string[];         // Bullet list of outcomes (for case study Phase 2)
   testimonialId?: string;     // FK → testimonials.ts by id
+  // --- NEW FIELDS untuk Project Detail Page ---
+  challengeProblem?: string;    // Deskripsi masalah (eloqwnt "Problem")
+  challengeSolution?: string;  // Deskripsi solusi (eloqwnt "Solution")
+  keyTakeaways?: string[];     // Key takeaways bullet
+  duration?: string;           // e.g. "3 minggu", "6 minggu"
+  industry?: string;           // e.g. "Health Tech, Indonesia"
+  services?: string[];         // e.g. ["Web Design", "UI/UX"]
+  gallery?: string[];          // Array tambahan gambar screenshot
+  nextProjectId?: string;      // ID project selanjutnya (untuk navigasi)
+  prevProjectId?: string;      // ID project sebelumnya
 }
 
 export const projects: Project[] = [
@@ -50,6 +60,22 @@ export const projects: Project[] = [
       'Fitur crisis SOS berhasil menghubungkan pengguna dengan profesional',
     ],
     testimonialId: 'testimonial-01',
+    challengeProblem: 'Meningkatnya kebutuhan akan layanan kesehatan mental yang mudah diakses dan gratis di Indonesia, terutama bagi mereka yang membutuhkan bantuan kapan saja tanpa batasan waktu.',
+    challengeSolution: 'Kami membangun RuangTeduh dengan integrasi AI companion 24/7 dan fitur crisis SOS untuk memberikan dukungan seketika serta menghubungkan pengguna dengan profesional saat krisis.',
+    keyTakeaways: [
+      'Integrasi AI dapat memberikan first-response yang baik',
+      'Aksesibilitas adalah kunci dalam aplikasi kesehatan',
+      'Performa aplikasi harus optimal tanpa downtime'
+    ],
+    duration: '12 minggu',
+    industry: 'Health Tech, Indonesia',
+    services: ['Web Design', 'Fullstack Development', 'AI Integration'],
+    gallery: [
+      '/images/projects/ruangteduh-1.png',
+      '/images/projects/ruangteduh-2.png'
+    ],
+    nextProjectId: 'conversion-climb',
+    prevProjectId: 'propvista',
   },
   {
     id: 'conversion-climb',
@@ -75,6 +101,22 @@ export const projects: Project[] = [
       'Struktur copy menggunakan Awareness Ladder framework',
     ],
     testimonialId: 'testimonial-03',
+    challengeProblem: 'Halaman sales page sebelumnya memiliki tingkat konversi yang rendah karena struktur copy yang kurang terarah dan desain visual yang tidak mendukung storytelling.',
+    challengeSolution: 'Menerapkan framework Awareness Ladder untuk menstrukturkan copy, dikombinasikan dengan desain visual yang mengarahkan mata pengunjung ke call-to-action.',
+    keyTakeaways: [
+      'Copywriting yang terstruktur meningkatkan konversi secara signifikan',
+      'Desain harus mendukung tujuan copy, bukan sebaliknya',
+      'Kecepatan loading berdampak langsung pada bounce rate'
+    ],
+    duration: '3 minggu',
+    industry: 'Digital Marketing, Global',
+    services: ['Copywriting', 'Web Design', 'Frontend Development'],
+    gallery: [
+      '/images/projects/conversion-climb-1.png',
+      '/images/projects/conversion-climb-2.png'
+    ],
+    nextProjectId: 'pkwu-web',
+    prevProjectId: 'ruangteduh',
   },
   {
     id: 'pkwu-web',
@@ -99,6 +141,22 @@ export const projects: Project[] = [
       'Membangun fondasi pemahaman web development',
     ],
     // testimonialId: undefined — belum ada testimonial untuk project ini
+    challengeProblem: 'Sebagai tim baru, kami membutuhkan wadah untuk mengaplikasikan ilmu web development secara langsung ke dalam project nyata sebagai fondasi teknikal kami.',
+    challengeSolution: 'Membangun website kewirausahaan menggunakan Vanilla JS untuk benar-benar memahami fundamental web development (DOM manipulation, styling dasar) sebelum beralih ke framework modern.',
+    keyTakeaways: [
+      'Fundamental HTML, CSS, dan JS sangat penting dan tidak bisa dilewati',
+      'Kerja sama dan pembagian tugas dalam project pertama',
+      'Pengalaman deployment secara real-world'
+    ],
+    duration: '4 minggu',
+    industry: 'Education, Indonesia',
+    services: ['Web Development', 'UI Design'],
+    gallery: [
+      '/images/projects/pkwu-1.png',
+      '/images/projects/pkwu-2.png'
+    ],
+    nextProjectId: 'propvista',
+    prevProjectId: 'conversion-climb',
   },
   {
     id: 'propvista',
@@ -124,6 +182,22 @@ export const projects: Project[] = [
       'Response time rata-rata di bawah 1 detik',
     ],
     testimonialId: 'testimonial-02',
+    challengeProblem: 'Pencarian properti yang ada saat ini seringkali membingungkan pengguna dengan filter yang terlalu kaku dan tidak dapat mengerti konteks pencarian natural bahasa manusia.',
+    challengeSolution: 'Mengimplementasikan pencarian berbasis AI (menggunakan Supabase dan OpenAI) yang memungkinkan pengguna mencari dengan bahasa natural seperti "rumah 3 kamar dekat stasiun MRT".',
+    keyTakeaways: [
+      'Pencarian berbasis AI sangat mempermudah user experience',
+      'Manajemen state untuk filter dan listing harus sangat efisien',
+      'Kecepatan load dan performa query database sangat krusial'
+    ],
+    duration: '8 minggu',
+    industry: 'Real Estate, Indonesia',
+    services: ['Web Application', 'AI Search Integration', 'UI/UX Design'],
+    gallery: [
+      '/images/projects/propvista-1.png',
+      '/images/projects/propvista-2.png'
+    ],
+    nextProjectId: 'ruangteduh',
+    prevProjectId: 'pkwu-web',
   },
 ];
 

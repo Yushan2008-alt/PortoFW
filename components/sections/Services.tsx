@@ -82,7 +82,7 @@ export function Services() {
             <h2
               className="mt-3 font-display font-bold"
               style={{
-                fontSize: 'clamp(1.75rem, 4.5vw, 3rem)',
+                fontSize: 'clamp(1.4rem, 4vw, 2.5rem)',
                 letterSpacing: '-0.02em',
                 color: 'var(--text-on-dark)',
               }}

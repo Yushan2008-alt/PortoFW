@@ -1,0 +1,166 @@
+
+> forza-studio-portfolio@0.1.0 dev
+> next dev -p 3001
+
+   ▲ Next.js 15.5.19
+   - Local:        http://localhost:3001
+   - Network:      http://192.168.56.1:3001
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 3.4s
+ ○ Compiling / ...
+ ✓ Compiled / in 20.7s (4611 modules)
+ GET / 200 in 663ms
+ GET / 200 in 981ms
+ ○ Compiling /_not-found ...
+ GET / 200 in 2110ms
+ ✓ Compiled /_not-found in 24.3s (4598 modules)
+ GET /images/team/bilal.png 404 in 28268ms
+ GET /images/team/yushan.png 404 in 29143ms
+ GET / 200 in 11285ms
+ GET / 200 in 29785ms
+ GET /images/team/bilal.png 404 in 634ms
+ GET /images/team/yushan.png 404 in 665ms
+ GET /images/team/bilal.png 404 in 532ms
+ GET /images/team/yushan.png 404 in 548ms
+ GET / 200 in 2119ms
+ GET /images/team/bilal.png 404 in 771ms
+ GET /images/team/yushan.png 404 in 785ms
+ GET /images/team/bilal.png 404 in 1440ms
+ GET /images/team/yushan.png 404 in 1446ms
+ GET /images/projects/conversion-climb.png 404 in 800ms
+ GET /images/projects/pkwu.png 404 in 811ms
+ GET /images/projects/propvista.png 404 in 833ms
+ GET /images/testimonials/testimonial-02.jpg 404 in 511ms
+ GET /images/testimonials/testimonial-03.jpg 404 in 524ms
+ GET /images/testimonials/testimonial-01.jpg 404 in 887ms
+ GET /images/clients/propvista.svg 404 in 880ms
+ GET /images/clients/conversion-climb.svg 404 in 891ms
+ GET /images/clients/ruangteduh.svg 404 in 908ms
+ GET /images/clients/placeholder-4.svg 404 in 344ms
+ GET / 200 in 327ms
+ GET /images/team/bilal.png 404 in 318ms
+ GET /images/team/yushan.png 404 in 332ms
+ GET /images/team/bilal.png 404 in 520ms
+ GET /images/team/yushan.png 404 in 537ms
+ GET / 200 in 2647ms
+ GET /images/team/bilal.png 404 in 639ms
+ GET /images/team/yushan.png 404 in 677ms
+ GET /images/team/bilal.png 404 in 381ms
+ GET /images/team/yushan.png 404 in 393ms
+ GET / 200 in 2082ms
+ GET /images/team/bilal.png 404 in 414ms
+ GET /images/team/yushan.png 404 in 423ms
+ GET /images/team/bilal.png 404 in 425ms
+ GET /images/team/yushan.png 404 in 440ms
+ GET / 200 in 1739ms
+ GET /images/team/bilal.png 404 in 525ms
+ GET /images/team/yushan.png 404 in 549ms
+ GET /images/team/bilal.png 404 in 435ms
+ GET /images/team/yushan.png 404 in 472ms
+ GET /images/projects/conversion-climb.png 404 in 321ms
+ GET /images/projects/pkwu.png 404 in 329ms
+ GET /images/projects/propvista.png 404 in 462ms
+ GET /images/clients/placeholder-4.svg 404 in 657ms
+ GET /images/clients/propvista.svg 404 in 716ms
+ GET /images/clients/conversion-climb.svg 404 in 719ms
+ GET /images/clients/ruangteduh.svg 404 in 724ms
+ GET /images/testimonials/testimonial-02.jpg 404 in 691ms
+ GET /images/testimonials/testimonial-01.jpg 404 in 350ms
+ GET /images/testimonials/testimonial-03.jpg 404 in 138ms
+ GET / 200 in 424ms
+ GET /images/team/bilal.png 404 in 202ms
+ GET /images/team/yushan.png 404 in 211ms
+ GET /images/team/bilal.png 404 in 550ms
+ GET /images/team/yushan.png 404 in 571ms
+ GET / 200 in 1638ms
+ GET /images/team/bilal.png 404 in 499ms
+ GET /images/team/yushan.png 404 in 522ms
+ GET /images/team/bilal.png 404 in 909ms
+ GET /images/team/yushan.png 404 in 1651ms
+ GET /images/projects/conversion-climb.png 404 in 713ms
+ GET /images/projects/pkwu.png 404 in 1382ms
+ GET /images/projects/propvista.png 404 in 2055ms
+ GET /images/clients/conversion-climb.svg 404 in 5708ms
+ GET /images/clients/ruangteduh.svg 404 in 5729ms
+ GET /images/clients/propvista.svg 404 in 5792ms
+ GET /images/testimonials/testimonial-02.jpg 404 in 407ms
+ GET /images/testimonials/testimonial-03.jpg 404 in 2465ms
+ GET /images/testimonials/testimonial-01.jpg 404 in 2572ms
+ GET /images/clients/placeholder-4.svg 404 in 6574ms
+ ✓ Compiled in 9.5s (4593 modules)
+ GET / 200 in 1129ms
+ GET / 200 in 427ms
+ GET / 200 in 175ms
+ GET / 200 in 1942ms
+ GET / 200 in 1011ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 5.2s (4584 modules)
+ GET /images/team/bilal.png 404 in 6632ms
+ GET /images/team/yushan.png 404 in 6663ms
+ GET / 200 in 4730ms
+ GET / 200 in 6540ms
+ GET /images/team/bilal.png 404 in 597ms
+ GET /images/team/yushan.png 404 in 604ms
+ GET / 200 in 894ms
+ GET / 200 in 927ms
+ GET / 200 in 228ms
+ GET /images/team/bilal.png 404 in 556ms
+ GET /images/team/yushan.png 404 in 570ms
+ GET / 200 in 2034ms
+ GET /images/team/bilal.png 404 in 503ms
+ GET /images/team/yushan.png 404 in 517ms
+ GET /images/team/bilal.png 404 in 472ms
+ GET /images/team/yushan.png 404 in 484ms
+ GET / 200 in 1727ms
+ GET /images/team/bilal.png 404 in 690ms
+ GET /images/team/yushan.png 404 in 705ms
+ GET /images/team/bilal.png 404 in 418ms
+ GET /images/team/yushan.png 404 in 435ms
+ GET /images/testimonials/testimonial-01.jpg 404 in 577ms
+ GET /images/testimonials/testimonial-02.jpg 404 in 587ms
+ GET /images/testimonials/testimonial-03.jpg 404 in 597ms
+ GET /images/clients/ruangteduh.svg 404 in 551ms
+ GET /images/clients/placeholder-4.svg 404 in 546ms
+ GET /images/clients/propvista.svg 404 in 549ms
+ GET /images/clients/conversion-climb.svg 404 in 553ms
+ POST / 200 in 1075ms
+ GET / 200 in 426ms
+ GET /images/team/bilal.png 404 in 334ms
+ GET /images/team/yushan.png 404 in 357ms
+ GET /images/team/bilal.png 404 in 828ms
+ GET /images/team/yushan.png 404 in 849ms
+ ✓ Compiled in 53.3s (4594 modules)
+ GET / 200 in 18854ms
+ GET / 200 in 2969ms
+ GET / 200 in 7286ms
+ GET / 200 in 2271ms
+ GET / 200 in 2958ms
+ GET / 200 in 316ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 2.9s (4584 modules)
+ GET /images/team/bilal.png 404 in 4197ms
+ GET /images/team/yushan.png 404 in 4243ms
+ ✓ Compiled in 5.1s (4598 modules)
+ GET / 200 in 809ms
+ GET / 200 in 475ms
+ GET / 200 in 423ms
+ GET / 200 in 358ms
+ GET / 200 in 1811ms
+ GET /images/team/bilal.png 404 in 350ms
+ GET /images/team/yushan.png 404 in 364ms
+ GET /images/team/bilal.png 404 in 902ms
+ GET /images/team/yushan.png 404 in 971ms
+ GET / 200 in 815ms
+ GET /images/team/bilal.png 404 in 329ms
+ GET /images/team/yushan.png 404 in 342ms
+ GET /images/team/bilal.png 404 in 527ms
+ GET /images/team/yushan.png 404 in 517ms
+ ○ Compiling /_error ...
+ GET / 500 in 10094ms
+ ✓ Compiled /_error in 6.2s (4939 modules)
+ GET / 200 in 5627ms
+ GET / 200 in 503ms
+ GET / 200 in 586ms
+ GET / 200 in 653ms

@@ -82,7 +82,7 @@ export function Hero() {
             variants={itemVariants}
             className="relative z-10 mt-6 font-display font-bold leading-[0.95]"
             style={{
-              fontSize: 'clamp(2.5rem, 8vw, 5.5rem)',
+              fontSize: 'clamp(1.8rem, 6vw, 4.5rem)',
               letterSpacing: '-0.03em',
               color: 'var(--text-primary)',
             }}
@@ -96,7 +96,7 @@ export function Hero() {
           <motion.p
             variants={itemVariants}
             className="relative z-10 mt-6 leading-relaxed max-w-2xl mx-auto"
-            style={{ fontSize: 'clamp(1rem, 1.8vw, 1.25rem)', color: 'var(--text-secondary)' }}
+            style={{ fontSize: 'clamp(0.9rem, 1.5vw, 1.1rem)', color: 'var(--text-secondary)' }}
           >
             Dari landing page hingga web app, Forza Studio membangun
             produk digital yang mengkonversi pengunjung jadi pelanggan.

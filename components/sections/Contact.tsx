@@ -72,8 +72,8 @@ export function Contact() {
     const budget   = formData.get('budget')   as string;
 
     // 1. Required field check
-    if (!name || !email || !message) {
-      setClientError('Nama, email, dan pesan wajib diisi.');
+    if (!name || !email || !interest || !budget || !message) {
+      setClientError('Nama, email, layanan, budget, dan pesan wajib diisi.');
       setStatus('idle');
       return;
     }
@@ -141,7 +141,7 @@ export function Contact() {
           <h2
             className="mt-4 font-display font-bold"
             style={{
-              fontSize: 'clamp(1.75rem, 4.5vw, 3rem)',
+              fontSize: 'clamp(1.4rem, 4vw, 2.5rem)',
               letterSpacing: '-0.02em',
               color: 'var(--text-primary)',
             }}
@@ -267,6 +267,7 @@ export function Contact() {
           )}
 
           <Button
+            type="submit"
             variant="primary"
             size="lg"
             className="w-full justify-center"
@@ -312,11 +313,11 @@ export function Contact() {
             Atau hubungi kami langsung:
           </p>
           <a
-            href="mailto:hello@forzastudio.dev"
+            href="mailto:glarewardengroup@gmail.com"
             className="text-sm hover:underline"
             style={{ color: 'var(--gemini-purple)' }}
           >
-            hello@forzastudio.dev
+            glarewardengroup@gmail.com
           </a>
         </div>
       </div>

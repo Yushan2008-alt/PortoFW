@@ -16,12 +16,12 @@ export function TestimonialCard({
     <div
       className={cn(
         // Layout
-        'relative flex flex-col justify-between min-h-[320px] rounded-2xl p-8',
+        'relative flex flex-col justify-between min-h-[380px] md:min-h-[340px] rounded-3xl p-8 md:p-10',
         // Appearance
-        'bg-[var(--bg-card)] border border-black/5 shadow-sm',
+        'bg-[var(--bg-card)] border border-black/5 dark:border-white/5 shadow-lg hover:shadow-xl',
         // Active / side-card state transition
-        'transition-all duration-300',
-        isActive ? 'scale-100 opacity-100' : 'scale-95 opacity-60',
+        'transition-all duration-500',
+        isActive ? 'scale-100 opacity-100 shadow-[0_8px_30px_rgb(0,0,0,0.08)] ring-1 ring-black/5 dark:ring-white/10' : 'scale-[0.92] opacity-40 shadow-none',
       )}
     >
       {/* Decorative opening quote mark */}
@@ -33,7 +33,7 @@ export function TestimonialCard({
       </span>
 
       {/* Quote body */}
-      <p className="relative z-10 font-jakarta text-base md:text-lg text-[var(--text-primary)] leading-relaxed pt-6">
+      <p className="relative z-10 font-jakarta text-lg md:text-xl text-[var(--text-primary)] leading-relaxed pt-8 font-medium">
         {testimonial.quote}
       </p>
 

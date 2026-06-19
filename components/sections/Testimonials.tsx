@@ -24,21 +24,21 @@ export function Testimonials() {
       {/* Background decoration — subtle gemini glow top-right */}
       <div
         aria-hidden="true"
-        className="absolute -top-24 -right-24 w-[480px] h-[480px] rounded-full pointer-events-none"
+        className="absolute -top-24 -right-24 w-[480px] h-[480px] md:w-[600px] md:h-[600px] rounded-full pointer-events-none"
         style={{
           background: 'var(--gradient-gemini)',
-          opacity: 0.05,
-          filter: 'blur(90px)',
+          opacity: 0.08,
+          filter: 'blur(100px)',
         }}
       />
       {/* Blewah glow bottom-left */}
       <div
         aria-hidden="true"
-        className="absolute bottom-0 -left-24 w-72 h-72 rounded-full pointer-events-none"
+        className="absolute bottom-0 -left-24 w-72 h-72 md:w-[500px] md:h-[500px] rounded-full pointer-events-none"
         style={{
           background: 'var(--blewah)',
-          opacity: 0.06,
-          filter: 'blur(70px)',
+          opacity: 0.08,
+          filter: 'blur(90px)',
         }}
       />
 
@@ -59,11 +59,11 @@ export function Testimonials() {
           </span>
 
           <h2
-            className="mt-3 font-display font-bold"
+            className="mt-3 font-display font-bold text-transparent bg-clip-text"
             style={{
-              fontSize: 'clamp(1.75rem, 4.5vw, 3rem)',
+              fontSize: 'clamp(1.8rem, 5vw, 3rem)',
               letterSpacing: '-0.02em',
-              color: 'var(--text-primary)',
+              backgroundImage: 'linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%)',
             }}
           >
             Apa Kata Klien Kami
@@ -72,7 +72,7 @@ export function Testimonials() {
           <p
             className="mt-4 max-w-xl mx-auto leading-relaxed"
             style={{
-              fontSize: 'clamp(0.9rem, 1.5vw, 1.05rem)',
+              fontSize: 'clamp(0.85rem, 1.3vw, 1rem)',
               color: 'var(--text-secondary)',
             }}
           >

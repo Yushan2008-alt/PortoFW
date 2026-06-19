@@ -28,14 +28,15 @@ export default function HomePage() {
         {/* 3. About */}
         <About />
 
-        {/* 4. Client logo wall — social proof directly after About */}
-        <hr className="gradient-divider" />
-        <ClientLogoWall />
-
         <hr className="gradient-divider" />
 
-        {/* 5. Work / Portfolio */}
+        {/* 4. Work / Portfolio */}
         <Work />
+
+        <hr className="gradient-divider" />
+
+        {/* 5. Client logo wall — social proof */}
+        <ClientLogoWall />
 
         <hr className="gradient-divider" />
 
@@ -44,16 +45,18 @@ export default function HomePage() {
 
         <hr className="gradient-divider" />
 
-        {/* 7. Tech Stack */}
-        <TechStack />
-
-        {/* 8. Testimonials — trust signal after capabilities */}
-        <hr className="gradient-divider" />
+        {/* 7. Testimonials */}
         <Testimonials />
 
-        {/* 9. FAQ — objection handling before CTA */}
         <hr className="gradient-divider" />
+
+        {/* 8. FAQ */}
         <FAQ />
+
+        <hr className="gradient-divider" />
+
+        {/* 9. Tech Stack */}
+        <TechStack />
 
         <hr className="gradient-divider" />
 

@@ -6,22 +6,30 @@ import { Resend } from 'resend';
 // This crashes the server immediately on a bad deploy instead of failing
 // silently at runtime when the first email is attempted.
 // ─────────────────────────────────────────────────────────────────────────────
-if (!process.env.RESEND_API_KEY || !process.env.CONTACT_EMAIL) {
-  throw new Error(
-    'Missing required environment variables: RESEND_API_KEY and CONTACT_EMAIL must be set.'
-  );
+function getEmailConfig() {
+  const resendApiKey = process.env.RESEND_API_KEY;
+  const contactEmail = process.env.CONTACT_EMAIL;
+
+  if (!resendApiKey || !contactEmail) {
+    return null;
+  }
+
+  return {
+    resend: new Resend(resendApiKey),
+    contactEmail,
+    emailFrom: `Forza Studio <${contactEmail}>`,
+  };
 }
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 // ─────────────────────────────────────────────────────────────────────────────
-// 🔒 SECURITY 2: sanitizeText — strips HTML/script-injectable characters.
-// Prevents stored-XSS if email content is ever rendered in a web view,
-// and removes common prompt-injection vectors.
+// 🔒 SECURITY 9: Helper sanitasi — hapus HTML tags dari input user.
+// Prevents stored-XSS if email content is ever rendered in a web view.
 // ─────────────────────────────────────────────────────────────────────────────
 function sanitizeText(input: string): string {
   return input
-    .replace(/[<>]/g, '')          // strip angle brackets (HTML tags)
+    .replace(/<[^>]*>/g, '')       // strip HTML tags
+    .replace(/[<>]/g, '')          // strip leftover angle brackets
+    .replace(/['"]/g, '')          // strip quotes
     .replace(/[\u0000-\u001F]/g, '') // strip ASCII control characters
     .trim();
 }
@@ -100,6 +108,11 @@ function formatInquiryEmail(fields: {
 
 // ─────────────────────────────────────────────────────────────────────────────
 export async function sendContactMessage(formData: FormData) {
+  const emailConfig = getEmailConfig();
+  if (!emailConfig) {
+    return { ok: false, error: GENERIC_ERROR };
+  }
+
   // 🔒 SECURITY 3: Sanitize & trim ALL inputs before any processing.
   // Optional fields (company, phone, interest, budget) are sanitized too —
   // an attacker can send any field regardless of what the UI shows.
@@ -114,8 +127,8 @@ export async function sendContactMessage(formData: FormData) {
   // ─── Validation ──────────────────────────────────────────────────────────
 
   // 🔒 SECURITY 4: Validasi required fields (setelah sanitasi)
-  if (!name || !email || !message) {
-    return { ok: false, error: 'Nama, email, dan pesan wajib diisi.' };
+  if (!name || !email || !interest || !budget || !message) {
+    return { ok: false, error: 'Nama, email, layanan, budget, dan pesan wajib diisi.' };
   }
 
   // 🔒 SECURITY 5: Validasi format email
@@ -146,9 +159,9 @@ export async function sendContactMessage(formData: FormData) {
   // ─── Send email ─────────────────────────────────────────────────────
   try {
     // 1. Inquiry email → internal team
-    await resend.emails.send({
-      from:    'Forza Studio <noreply@forzastudio.dev>',
-      to:      process.env.CONTACT_EMAIL!,
+    await emailConfig.resend.emails.send({
+      from:    emailConfig.emailFrom,
+      to:      emailConfig.contactEmail,
       replyTo: email,
       subject: `[Forza Studio] Inquiry dari ${name}${company ? ` — ${company}` : ''}`,
       text:    formatInquiryEmail({ name, company, email, phone, interest, budget, message }),
@@ -157,8 +170,8 @@ export async function sendContactMessage(formData: FormData) {
     // 🔒 SECURITY 7: Auto-reply ke pengirim (tanpa reveal info sensitif)
     // `name` sudah di-sanitize via sanitizeText() — aman untuk diinterpolasi.
     // Body hanya berisi teks statis + nama — tidak ada data internal/sensitif.
-    await resend.emails.send({
-      from:    'Forza Studio <noreply@forzastudio.dev>',
+    await emailConfig.resend.emails.send({
+      from:    emailConfig.emailFrom,
       to:      email,
       subject: 'Terima kasih telah menghubungi Forza Studio!',
       text: [
@@ -169,8 +182,8 @@ export async function sendContactMessage(formData: FormData) {
         'Kami telah menerima inquiry Anda dan akan merespons dalam waktu 24 jam kerja.',
         '',
         'Salam,',
-        'Forza Studio Team',
-        'hello@forzastudio.dev',
+        'Forza Studio',
+        emailConfig.contactEmail,
       ].join('\n'),
     });
 

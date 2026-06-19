@@ -16,11 +16,11 @@ const jakarta = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://forzastudio.dev'),
-  title: 'Forza Studio — We Build Products That Move',
-  description: 'Tim 2 developer freelance. Web app, mobile app, dan produk digital berkualitas.',
+  title: 'Forza Studio — Kami Bangun Website Yang Menggerakkan Bisnis',
+  description: 'Dari landing page hingga web app, Forza Studio membangun produk digital yang mengkonversi pengunjung jadi pelanggan.',
   openGraph: {
     title: 'Forza Studio',
-    description: 'Tim 2 developer freelance. Web app, mobile app, dan produk digital berkualitas.',
+    description: 'Dari landing page hingga web app, Forza Studio membangun produk digital yang mengkonversi pengunjung jadi pelanggan.',
     url: 'https://forzastudio.dev',
     images: ['/og-image.png'],
   },

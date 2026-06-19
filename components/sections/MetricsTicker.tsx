@@ -1,11 +1,11 @@
 'use client';
 
-import { site } from '@/data/site';
+import { testimonials } from '@/data/testimonials';
 
 /**
  * MetricsTicker — Step 3.1
  *
- * Infinite-scroll marquee dari site.tickerItems[].
+ * Infinite-scroll marquee dari testimonials[].company.
  * Implementasi: CSS animation murni (transform: translateX) pada dua set
  * array identik yang di-render sekali. Tidak ada setInterval / RAF loop,
  * sehingga tidak ada risiko memory leak.
@@ -13,7 +13,7 @@ import { site } from '@/data/site';
  * Array max 10 items (sesuai data/site.ts) — duplikasi negligible.
  *
  * SECURITY: Tidak ada URL/HTML interpolation. Hanya teks statis dari
- * site.tickerItems[].value (hardcoded in data/site.ts).
+ * testimonials[].company (hardcoded in data/testimonials.ts).
  */
 
 const SEPARATOR = '✦';
@@ -21,22 +21,25 @@ const SEPARATOR = '✦';
 // Duplicate once → dua salinan identik untuk seamless infinite loop.
 // Ketika track pertama selesai (50% translateX), animation reset ke 0
 // dan langsung dilanjutkan oleh salinan kedua — invisible seam.
-const tickerItems = [...site.tickerItems, ...site.tickerItems];
+const companies = testimonials.map(t => t.company);
+const tickerItems = [...companies, ...companies];
 
 export function MetricsTicker() {
   return (
     <div
+      id="metrics"
       className="overflow-hidden select-none py-5"
       style={{
         background: 'var(--bg-dark)',
         borderTop: '1px solid rgba(255,255,255,0.06)',
         borderBottom: '1px solid rgba(255,255,255,0.06)',
+        contain: 'layout paint',
       }}
       aria-hidden="true" /* decorative — screen readers skip */
     >
       {/* Fade edges — gradient mask */}
       <div
-        className="relative"
+        className="relative w-full max-w-full min-w-0 overflow-hidden"
         style={{
           maskImage:
             'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
@@ -59,7 +62,7 @@ export function MetricsTicker() {
                   color: 'var(--text-on-dark)',
                 }}
               >
-                {item.value}
+                / {item}
               </span>
 
               {/* Separator dot */}

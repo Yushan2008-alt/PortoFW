@@ -3,18 +3,30 @@
 import { useState } from 'react';
 import { Send, Check } from 'lucide-react';
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export function NewsletterForm() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
 
   // SECURITY: Email is kept in local React state only.
   // It is NOT persisted to localStorage, sessionStorage, or any cookie.
   // Phase 1 = UI feedback only; Phase 2 will wire this to Resend Audience API.
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!email.trim()) return;
+    const trimmedEmail = email.trim();
+    if (!trimmedEmail) {
+      setError('Email wajib diisi.');
+      return;
+    }
+    if (!EMAIL_REGEX.test(trimmedEmail)) {
+      setError('Format email tidak valid.');
+      return;
+    }
 
     // Phase 1: no backend — show success state then reset after 3s
+    setError('');
     setSubmitted(true);
     setEmail(''); // clear input immediately
 
@@ -43,6 +55,8 @@ export function NewsletterForm() {
         required
         autoComplete="email"
         disabled={submitted}
+        aria-invalid={error ? 'true' : 'false'}
+        aria-describedby={error ? 'newsletter-email-error' : undefined}
         className={[
           'flex-1 px-4 py-2.5 rounded-lg text-sm',
           'bg-white/5 border border-white/10',
@@ -71,6 +85,11 @@ export function NewsletterForm() {
           <Send size={16} aria-hidden="true" />
         )}
       </button>
+      {error && (
+        <p id="newsletter-email-error" role="alert" className="sr-only">
+          {error}
+        </p>
+      )}
     </form>
   );
 }

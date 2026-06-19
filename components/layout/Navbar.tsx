@@ -1,13 +1,14 @@
 'use client';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
 const NAV_LINKS = [
-  { href: '#work',          label: 'Work' },
-  { href: '#services',      label: 'Services' },
-  { href: '#testimonials',  label: 'Testimonials' },
-  { href: '#about',         label: 'About' },
+  { href: '/#work',          label: 'Work' },
+  { href: '/#services',      label: 'Services' },
+  { href: '/#testimonials',  label: 'Testimonials' },
+  { href: '/#about',         label: 'About' },
 ];
 
 export function Navbar() {
@@ -38,17 +39,17 @@ export function Navbar() {
         <div className="mx-auto flex items-center justify-between px-6 md:px-10" style={{ maxWidth: 1200, height: 72 }}>
 
           {/* FIX 4E — Logo: "Forza" gradient, "Studio" dark */}
-          <a href="#hero" className="flex items-center">
+          <Link href="/" className="flex items-center">
             <span style={{ fontFamily: 'var(--font-syne, sans-serif)', fontSize: '1.25rem', fontWeight: 700 }}>
               <span className="gradient-text">Forza</span>
               <span style={{ color: 'var(--text-primary)' }}> Studio</span>
             </span>
-          </a>
+          </Link>
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-8">
             {NAV_LINKS.map(({ href, label }) => (
-              <a
+              <Link
                 key={href}
                 href={href}
                 className="relative text-sm font-medium transition-colors duration-200 group"
@@ -58,13 +59,13 @@ export function Navbar() {
               >
                 {label}
                 <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-current transition-all duration-200 group-hover:w-full" />
-              </a>
+              </Link>
             ))}
           </nav>
 
           {/* Desktop CTA */}
           <div className="hidden md:block">
-            <Button variant="primary" size="sm" href="#contact">
+            <Button variant="primary" size="sm" href="/#contact">
               Hubungi Kami
             </Button>
           </div>
@@ -88,7 +89,7 @@ export function Navbar() {
           style={{ background: 'var(--bg-primary)' }}
         >
           {NAV_LINKS.map(({ href, label }) => (
-            <a
+            <Link
               key={href}
               href={href}
               className="text-2xl font-medium transition-colors duration-200"
@@ -96,9 +97,9 @@ export function Navbar() {
               onClick={() => setMenuOpen(false)}
             >
               {label}
-            </a>
+            </Link>
           ))}
-          <Button variant="primary" size="md" href="#contact">
+          <Button variant="primary" size="md" href="/#contact">
             Hubungi Kami
           </Button>
         </div>
