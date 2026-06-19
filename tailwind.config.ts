@@ -36,6 +36,14 @@ const config: Config = {
         'morph-blob': 'morph-blob 8s ease-in-out infinite',
         'float-orb': 'float-orb 10s ease-in-out infinite',
         'bounce-scroll': 'bounce-scroll 1.5s ease-in-out infinite',
+        // WhatsApp floating button — subtle attention pulse (not an error state)
+        'wa-pulse': 'wa-pulse 3s ease-in-out infinite',
+      },
+      keyframes: {
+        'wa-pulse': {
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%':      { transform: 'scale(1.08)' },
+        },
       },
     },
   },

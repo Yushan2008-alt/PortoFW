@@ -74,7 +74,7 @@ export function Hero() {
 
           {/* 1. Badge */}
           <motion.div variants={itemVariants} className="relative z-10">
-            <Badge variant="blewah">Available for Projects ✦</Badge>
+            <Badge variant="blewah">Tersedia untuk Project Baru ✦</Badge>
           </motion.div>
 
           {/* 2. Headline — FIX 6A: fluid clamp typography */}
@@ -87,9 +87,9 @@ export function Hero() {
               color: 'var(--text-primary)',
             }}
           >
-            We Build Digital
+            Kami Bangun Website
             <br />
-            <span className="gradient-text">Products That Move.</span>
+            <span className="gradient-text">Yang Menggerakkan Bisnis.</span>
           </motion.h1>
 
           {/* 3. Subtext — FIX 6B: fluid clamp */}
@@ -98,7 +98,8 @@ export function Hero() {
             className="relative z-10 mt-6 leading-relaxed max-w-2xl mx-auto"
             style={{ fontSize: 'clamp(1rem, 1.8vw, 1.25rem)', color: 'var(--text-secondary)' }}
           >
-            Tim 2 developer yang fokus pada hasil nyata. Dari desain ke produksi, kami tangani semuanya.
+            Dari landing page hingga web app, Forza Studio membangun
+            produk digital yang mengkonversi pengunjung jadi pelanggan.
           </motion.p>
 
           {/* 4. Buttons */}
@@ -106,11 +107,11 @@ export function Hero() {
             variants={itemVariants}
             className="relative z-10 mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center w-full"
           >
-            <Button variant="primary" size="lg" href="#work">
-              See Our Work
+            <Button variant="primary" size="lg" href="#contact">
+              Mulai Project Anda
             </Button>
-            <Button variant="secondary" size="lg" href="#contact">
-              Get In Touch →
+            <Button variant="secondary" size="lg" href="#work">
+              Lihat Karya Kami →
             </Button>
           </motion.div>
 

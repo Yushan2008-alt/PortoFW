@@ -1,12 +1,14 @@
 'use client';
 import { Github, Instagram, Linkedin, Mail } from 'lucide-react';
 import { site } from '@/data/site';
+import { NewsletterForm } from '@/components/ui/NewsletterForm';
 
 const NAV_LINKS = [
-  { href: '#work',     label: 'Work' },
-  { href: '#about',    label: 'About' },
-  { href: '#services', label: 'Services' },
-  { href: '#contact',  label: 'Contact' },
+  { href: '#work',         label: 'Work' },
+  { href: '#services',     label: 'Services' },
+  { href: '#testimonials', label: 'Testimonials' },
+  { href: '#about',        label: 'About' },
+  { href: '#contact',      label: 'Hubungi Kami' },
 ];
 
 const DIM   = 'rgba(244,243,239,0.5)';
@@ -115,46 +117,47 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Col 3 — Contact */}
+          {/* Col 3 — Newsletter + Contact */}
           <div>
             <h4
               className="text-xs font-semibold uppercase tracking-widest mb-4"
               style={{ color: LABEL }}
             >
-              Contact
+              Newsletter
             </h4>
 
-            <p className="text-sm mb-2" style={{ color: LINK }}>
-              Siap membantu project kamu.
+            <p className="text-sm mb-3" style={{ color: DIM }}>
+              Subscribe untuk update project dan tips digital.
             </p>
 
-            <a
-              href={`mailto:${site.email}`}
-              className="text-sm hover:underline"
-              style={{ color: 'var(--blewah)' }}
-            >
-              {site.email}
-            </a>
+            <NewsletterForm />
 
-            <p className="text-sm mt-3" style={{ color: LINK }}>
-              WhatsApp:
-            </p>
-            <a
-              href={`https://wa.me/${site.whatsapp.replace(/\D/g, '')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm hover:underline"
-              style={{ color: 'var(--blewah)' }}
-            >
-              {site.whatsapp}
-            </a>
+            {/* Contact info below newsletter */}
+            <div className="mt-6 space-y-2">
+              <a
+                href={`mailto:${site.email}`}
+                className="block text-sm hover:underline"
+                style={{ color: 'var(--blewah)' }}
+              >
+                {site.email}
+              </a>
+              <a
+                href={`https://wa.me/${site.whatsapp.replace(/\D/g, '')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-sm hover:underline"
+                style={{ color: 'var(--blewah)' }}
+              >
+                {site.whatsapp}
+              </a>
+            </div>
           </div>
         </div>
 
         {/* Bottom row */}
         <div className="mt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs" style={{ color: COPY }}>
-            © 2025 Forza Studio. All rights reserved.
+            © 2026 Forza Studio. All rights reserved.
           </p>
           <p className="text-xs" style={{ color: COPY }}>
             Designed &amp; Built by Forza Studio

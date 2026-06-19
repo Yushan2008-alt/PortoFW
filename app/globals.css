@@ -75,6 +75,15 @@ body {
   50%       { transform: translateY(8px); }
 }
 
+@keyframes wa-pulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.30); }
+  50%       { box-shadow: 0 4px 32px rgba(37,211,102,0.55); }
+}
+
+.animate-bounce-scroll {
+  animation: bounce-scroll 1.6s ease-in-out infinite;
+}
+
 /* === GRAIN OVERLAY === */
 body::before {
   content: '';
@@ -171,6 +180,31 @@ body::before {
 .text-fluid-2xl  { font-size: clamp(1.5rem, 3.5vw, 2.25rem); }
 .text-fluid-3xl  { font-size: clamp(2rem, 5vw, 3.5rem); }
 .text-fluid-4xl  { font-size: clamp(2.5rem, 7vw, 5rem); }
+
+/* === TICKER MARQUEE === */
+.ticker-track {
+  /* total width = 2× real items → animate exactly 50% to reset seamlessly */
+  animation: ticker-scroll 28s linear infinite;
+  will-change: transform;
+}
+
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+  }
+}
+
+/* === CLIENT LOGO CARD HOVER === */
+.client-logo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-medium);
+}
 
 /* === MOBILE === */
 @media (max-width: 640px) {

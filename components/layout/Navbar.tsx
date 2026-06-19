@@ -4,10 +4,10 @@ import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
 const NAV_LINKS = [
-  { href: '#work',     label: 'Work' },
-  { href: '#about',    label: 'About' },
-  { href: '#services', label: 'Services' },
-  { href: '#contact',  label: 'Contact' },
+  { href: '#work',          label: 'Work' },
+  { href: '#services',      label: 'Services' },
+  { href: '#testimonials',  label: 'Testimonials' },
+  { href: '#about',         label: 'About' },
 ];
 
 export function Navbar() {
@@ -65,7 +65,7 @@ export function Navbar() {
           {/* Desktop CTA */}
           <div className="hidden md:block">
             <Button variant="primary" size="sm" href="#contact">
-              Hire Us
+              Hubungi Kami
             </Button>
           </div>
 
@@ -99,7 +99,7 @@ export function Navbar() {
             </a>
           ))}
           <Button variant="primary" size="md" href="#contact">
-            Hire Us
+            Hubungi Kami
           </Button>
         </div>
       )}

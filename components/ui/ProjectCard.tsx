@@ -1,6 +1,7 @@
 'use client';
 import { Project } from '@/data/projects';
 import { SmartImage } from './SmartImage';
+import { MetricBadge } from './MetricBadge';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 
@@ -59,6 +60,21 @@ export function ProjectCard({ project, index, onClick }: ProjectCardProps) {
         >
           {project.category}
         </motion.div>
+
+        {/* Metric badges — max 3, purely from props */}
+        {project.metrics && project.metrics.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 mb-3">
+            {project.metrics.slice(0, 3).map((metric) => (
+              <MetricBadge
+                key={metric.label}
+                label={metric.label}
+                value={metric.value}
+                icon={metric.icon}
+                variant="light"
+              />
+            ))}
+          </div>
+        )}
 
         <motion.h3
           layoutId={`project-title-${project.id}`}

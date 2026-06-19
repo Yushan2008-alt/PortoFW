@@ -1,30 +1,68 @@
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { Hero } from '@/components/sections/Hero';
+import { MetricsTicker } from '@/components/sections/MetricsTicker';
 import { About } from '@/components/sections/About';
+import { ClientLogoWall } from '@/components/sections/ClientLogoWall';
 import { Work } from '@/components/sections/Work';
 import { Services } from '@/components/sections/Services';
 import { TechStack } from '@/components/sections/TechStack';
+import { Testimonials } from '@/components/sections/Testimonials';
+import { FAQ } from '@/components/sections/FAQ';
 import { Contact } from '@/components/sections/Contact';
+import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 
 export default function HomePage() {
   return (
     <>
       <Navbar />
       <main>
+        {/* 1. Hero */}
         <Hero />
+
+        {/* 2. Metrics ticker — dark band break after hero */}
+        <MetricsTicker />
+
         <hr className="gradient-divider" />
+
+        {/* 3. About */}
         <About />
+
+        {/* 4. Client logo wall — social proof directly after About */}
         <hr className="gradient-divider" />
+        <ClientLogoWall />
+
+        <hr className="gradient-divider" />
+
+        {/* 5. Work / Portfolio */}
         <Work />
+
         <hr className="gradient-divider" />
+
+        {/* 6. Services */}
         <Services />
+
         <hr className="gradient-divider" />
+
+        {/* 7. Tech Stack */}
         <TechStack />
+
+        {/* 8. Testimonials — trust signal after capabilities */}
         <hr className="gradient-divider" />
+        <Testimonials />
+
+        {/* 9. FAQ — objection handling before CTA */}
+        <hr className="gradient-divider" />
+        <FAQ />
+
+        <hr className="gradient-divider" />
+
+        {/* 10. Contact CTA */}
         <Contact />
       </main>
       <Footer />
+      {/* Floating WhatsApp CTA — hides automatically when #contact is in view */}
+      <WhatsAppButton />
     </>
   );
 }
