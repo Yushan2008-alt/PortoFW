@@ -17,7 +17,7 @@ function getEmailConfig() {
   return {
     resend: new Resend(resendApiKey),
     contactEmail,
-    emailFrom: `Forza Studio <${contactEmail}>`,
+    emailFrom: `Glare Warden <${contactEmail}>`,
   };
 }
 
@@ -163,7 +163,7 @@ export async function sendContactMessage(formData: FormData) {
       from:    emailConfig.emailFrom,
       to:      emailConfig.contactEmail,
       replyTo: email,
-      subject: `[Forza Studio] Inquiry dari ${name}${company ? ` — ${company}` : ''}`,
+      subject: `[Glare Warden] Inquiry dari ${name}${company ? ` — ${company}` : ''}`,
       text:    formatInquiryEmail({ name, company, email, phone, interest, budget, message }),
     });
 
@@ -173,16 +173,16 @@ export async function sendContactMessage(formData: FormData) {
     await emailConfig.resend.emails.send({
       from:    emailConfig.emailFrom,
       to:      email,
-      subject: 'Terima kasih telah menghubungi Forza Studio!',
+      subject: 'Terima kasih telah menghubungi Glare Warden!',
       text: [
         `Halo ${name},`,
         '',
-        'Terima kasih sudah menghubungi Forza Studio!',
+        'Terima kasih sudah menghubungi Glare Warden!',
         '',
         'Kami telah menerima inquiry Anda dan akan merespons dalam waktu 24 jam kerja.',
         '',
         'Salam,',
-        'Forza Studio',
+        'Glare Warden',
         emailConfig.contactEmail,
       ].join('\n'),
     });

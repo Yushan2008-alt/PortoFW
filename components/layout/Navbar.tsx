@@ -38,11 +38,10 @@ export function Navbar() {
       >
         <div className="mx-auto flex items-center justify-between px-6 md:px-10" style={{ maxWidth: 1200, height: 72 }}>
 
-          {/* FIX 4E — Logo: "Forza" gradient, "Studio" dark */}
           <Link href="/" className="flex items-center">
             <span style={{ fontFamily: 'var(--font-syne, sans-serif)', fontSize: '1.25rem', fontWeight: 700 }}>
-              <span className="gradient-text">Forza</span>
-              <span style={{ color: 'var(--text-primary)' }}> Studio</span>
+              <span className="gradient-text">Glare</span>
+              <span style={{ color: 'var(--text-primary)' }}> Warden</span>
             </span>
           </Link>
 

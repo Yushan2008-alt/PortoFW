@@ -21,7 +21,7 @@ export const team: TeamMember[] = [
     socials: {
       github: 'https://github.com/BilalMayor',
       linkedin: '',
-      email: 'bilal@forzastudio.dev',
+      email: 'bilal@glarewarden.com',
     },
   },
   {
@@ -35,7 +35,7 @@ export const team: TeamMember[] = [
     socials: {
       github: '',
       linkedin: '',
-      email: 'yushan@forzastudio.dev',
+      email: 'yushan@glarewarden.com',
     },
   },
 ];

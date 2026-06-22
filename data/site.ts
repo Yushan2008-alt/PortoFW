@@ -1,14 +1,12 @@
 export const site = {
-  name: 'Forza Studio',
+  name: 'Glare Warden',
 
-  // UPDATED: tagline sesuai Data_Model_Definitions.md §5
-  tagline: 'Web Development Agency untuk Bisnis Indonesia.',
+  tagline: 'Web Development Agency — Solutions That Shine.',
 
-  // UPDATED: description lebih deskriptif untuk SEO & meta tag
   description:
-    'Forza Studio adalah web development agency yang membangun website profesional untuk UMKM dan korporat Indonesia.',
+    'Glare Warden adalah web development agency yang membangun website, web app, dan produk digital yang mengkonversi pengunjung jadi pelanggan.',
 
-  url: 'https://forzastudio.dev',
+  url: 'https://glarewarden.com',
   email: 'glarewardengroup@gmail.com',
 
   // SECURITY NOTE: disimpan tanpa karakter khusus — hanya digit.
@@ -19,8 +17,8 @@ export const site = {
 
   socials: {
     github: 'https://github.com/BilalMayor',
-    instagram: '', // TODO: isi dengan URL Instagram Forza Studio
-    linkedin: '', // TODO: isi dengan URL LinkedIn Forza Studio
+    instagram: '', // TODO: isi dengan URL Instagram Glare Warden
+    linkedin: '', // TODO: isi dengan URL LinkedIn Glare Warden
   },
 
   stats: {

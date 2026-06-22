@@ -2,39 +2,44 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { projects } from '@/data/projects';
-import { ProjectTestimonial } from '@/components/sections/ProjectTestimonial';
-import { 
-  ArrowLeft, 
-  ArrowRight, 
-  CheckCircle2, 
-  ExternalLink, 
-  Calendar, 
-  Briefcase, 
-  Clock, 
-  Building2,
-  Quote
+import { projects, CATEGORY_LABELS } from '@/data/projects';
+import {
+  ArrowLeft,
+  ArrowRight,
+  ExternalLink,
+  Calendar,
+  Clock,
+  CheckCircle2,
 } from 'lucide-react';
 
 type Props = {
   params: Promise<{ id: string }>;
 };
 
-// --- Generate Metadata for SEO ---
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
   const project = projects.find((p) => p.id === id);
 
   if (!project) {
-    return {
-      title: 'Project Not Found | Forza Studio',
-    };
+    return { title: 'Project Not Found | Glare Warden' };
   }
 
   return {
-    title: `${project.title} - Case Study | Forza Studio`,
+    title: `${project.title} - Case Study | Glare Warden`,
     description: project.tagline,
   };
+}
+
+/* ─── Section heading accent ─── */
+function SectionAccent() {
+  return (
+    <div
+      className="h-[2px] w-10 rounded-full mb-4"
+      style={{
+        background: 'linear-gradient(90deg, var(--blewah), var(--gemini-purple))',
+      }}
+    />
+  );
 }
 
 export default async function ProjectDetail({ params }: Props) {
@@ -45,133 +50,179 @@ export default async function ProjectDetail({ params }: Props) {
     notFound();
   }
 
-  // Cari Prev & Next Project berdasarkan ID
-  const prevProject = project.prevProjectId 
-    ? projects.find((p) => p.id === project.prevProjectId) 
+  const prevProject = project.prevProjectId
+    ? projects.find((p) => p.id === project.prevProjectId)
     : undefined;
-  const nextProject = project.nextProjectId 
-    ? projects.find((p) => p.id === project.nextProjectId) 
+  const nextProject = project.nextProjectId
+    ? projects.find((p) => p.id === project.nextProjectId)
     : undefined;
 
   return (
-    <main className="min-h-screen bg-stone-50 pb-24 pt-32">
-      <article className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        
-        {/* Back Button */}
-        <Link 
-          href="/#work" 
-          className="group mb-8 inline-flex items-center gap-2 text-sm font-medium text-stone-500 hover:text-stone-900 transition-colors"
+    <main className="min-h-screen" style={{ background: 'var(--bg-primary)' }}>
+
+      {/* ═══════════════════════════════════════════════════════════════════
+          1. HERO — Full-bleed image + overlay
+         ═══════════════════════════════════════════════════════════════════ */}
+      <section className="relative w-full h-[80vh] min-h-[520px] overflow-hidden">
+        <Image
+          src={project.thumbnail}
+          alt={`${project.title} — Hero`}
+          fill
+          className="object-cover"
+          priority
+        />
+        {/* Layered gradient overlay for depth */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `
+              linear-gradient(to top, rgba(15,14,13,0.92) 0%, rgba(15,14,13,0.4) 40%, transparent 70%),
+              linear-gradient(to bottom, rgba(15,14,13,0.15) 0%, transparent 30%)
+            `,
+          }}
+        />
+
+        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-14 lg:p-20">
+          <div className="max-w-5xl mx-auto">
+            <div className="flex items-center gap-3 mb-5">
+              <span
+                className="text-xs font-semibold tracking-widest uppercase rounded-full px-4 py-1.5"
+                style={{
+                  background: 'rgba(255,255,255,0.08)',
+                  color: 'rgba(255,255,255,0.8)',
+                  backdropFilter: 'blur(8px)',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                }}
+              >
+                {CATEGORY_LABELS[project.categorySlug]}
+              </span>
+              <span className="text-sm text-white/50">&mdash;</span>
+              <span
+                className="flex items-center gap-1.5 text-sm text-white/60"
+              >
+                <Calendar size={14} />
+                {project.year}
+              </span>
+            </div>
+            <h1
+              className="font-display font-bold text-white leading-[1.05] max-w-4xl text-fluid-3xl md:text-fluid-4xl"
+            >
+              {project.title}
+            </h1>
+            <p className="mt-5 text-fluid-lg md:text-fluid-xl text-white/60 max-w-2xl leading-relaxed">
+              {project.tagline}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════
+          Content wrapper — negative margin pulls it above hero bottom
+         ═══════════════════════════════════════════════════════════════════ */}
+      <article className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 relative z-10">
+
+        {/* ── 2. AT A GLANCE ── */}
+        <div
+          className="grid grid-cols-1 sm:grid-cols-3 rounded-2xl shadow-sm overflow-hidden"
+          style={{
+            background: 'var(--bg-card)',
+            border: '1px solid var(--border-subtle)',
+            boxShadow: 'var(--shadow-sm)',
+          }}
         >
-          <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-          Back to Projects
-        </Link>
-
-        {/* 1. HERO IMAGE (full-width, 16:9) */}
-        <div className="relative mb-12 aspect-video w-full overflow-hidden rounded-2xl bg-stone-200">
-          <Image
-            src={project.thumbnail}
-            alt={`${project.title} - Hero`}
-            fill
-            className="object-cover"
-            priority
-          />
+          {[
+            { label: 'Industry', value: project.industry || CATEGORY_LABELS[project.categorySlug] },
+            {
+              label: 'Duration',
+              value: (
+                <span className="flex items-center gap-2">
+                  <Clock size={15} style={{ color: 'var(--text-muted)' }} />
+                  {project.duration || 'N/A'}
+                </span>
+              ),
+            },
+            { label: 'Services', value: project.services ? project.services.join(', ') : 'Web Design, Development' },
+          ].map((item, i) => (
+            <div
+              key={item.label}
+              className="p-6 sm:p-8"
+              style={{
+                borderRight: i < 2 ? '1px solid var(--border-subtle)' : 'none',
+                borderBottom: 'none',
+              }}
+            >
+              <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--text-muted)' }}>
+                {item.label}
+              </p>
+              <p className="font-medium leading-relaxed" style={{ color: 'var(--text-primary)' }}>
+                {item.value}
+              </p>
+            </div>
+          ))}
         </div>
 
-        {/* HEADER SECTION */}
-        <div className="mb-16 max-w-3xl">
-          {/* 2. Title (h1) */}
-          <h1 className="mb-4 text-4xl font-bold tracking-tight text-stone-900 sm:text-5xl lg:text-6xl">
-            {project.title}
-          </h1>
-          
-          {/* 3. Description (tagline panjang) */}
-          <p className="mb-8 text-xl leading-relaxed text-stone-600 sm:text-2xl">
-            {project.tagline}
-          </p>
+        {/* ── 3. METRICS ── */}
+        {project.metrics && project.metrics.length > 0 && (
+          <div
+            className="mt-10 grid grid-cols-3 gap-6 md:gap-10 p-8 sm:p-10 rounded-2xl"
+            style={{
+              background: 'var(--bg-secondary)',
+              border: '1px solid var(--border-subtle)',
+            }}
+          >
+            {project.metrics.slice(0, 3).map((metric) => (
+              <div key={metric.label} className="text-center">
+                <div className="font-display font-bold gradient-text text-3xl md:text-4xl">
+                  {metric.value}
+                </div>
+                <div className="mt-2 text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
+                  {metric.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
 
-          {/* 4. Tags: Industry · Year · Services */}
-          <div className="flex flex-wrap items-center gap-4 text-sm font-medium text-stone-500">
-            {project.industry && (
-              <span className="flex items-center gap-1.5 rounded-full bg-stone-200/50 px-3 py-1">
-                <Building2 className="h-4 w-4" />
-                {project.industry}
-              </span>
-            )}
-            <span className="flex items-center gap-1.5 rounded-full bg-stone-200/50 px-3 py-1">
-              <Calendar className="h-4 w-4" />
-              {project.year}
-            </span>
-            {project.services && project.services.length > 0 && (
-              <span className="flex items-center gap-1.5 rounded-full bg-stone-200/50 px-3 py-1">
-                <Briefcase className="h-4 w-4" />
-                {project.services.join(', ')}
-              </span>
-            )}
-          </div>
-        </div>
+        {/* ═════════════════════════════════════════════════════════════════
+            Main content: 2-column grid (sidebar on right)
+           ═════════════════════════════════════════════════════════════════ */}
+        <div className="mt-20 grid grid-cols-1 gap-16 lg:grid-cols-12 lg:gap-14">
 
-        {/* 9. Summary Card (Industry | Duration | Services) */}
-        <div className="mb-16 grid grid-cols-1 divide-y divide-stone-200 rounded-2xl border border-stone-200 bg-white sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-          <div className="p-6">
-            <h3 className="mb-2 text-sm font-semibold text-stone-400 uppercase tracking-wider">Industry</h3>
-            <p className="font-medium text-stone-900">{project.industry || project.category}</p>
-          </div>
-          <div className="p-6">
-            <h3 className="mb-2 text-sm font-semibold text-stone-400 uppercase tracking-wider">Duration</h3>
-            <p className="flex items-center gap-2 font-medium text-stone-900">
-              <Clock className="h-4 w-4 text-stone-400" />
-              {project.duration || 'N/A'}
-            </p>
-          </div>
-          <div className="p-6">
-            <h3 className="mb-2 text-sm font-semibold text-stone-400 uppercase tracking-wider">Services</h3>
-            <p className="font-medium text-stone-900">
-              {project.services ? project.services.join(', ') : 'Web Design, Development'}
-            </p>
-          </div>
-        </div>
+          {/* ── LEFT COLUMN ── */}
+          <div className="lg:col-span-8 space-y-20">
 
-        {/* MAIN CONTENT AREA */}
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-12 lg:gap-12">
-          
-          <div className="lg:col-span-8">
-            {/* 5. "Tentang Project" section */}
-            <section className="mb-16">
-              <h2 className="mb-6 text-2xl font-bold text-stone-900 sm:text-3xl">Tentang Project</h2>
-              <div className="prose prose-stone max-w-none text-lg leading-relaxed text-stone-600">
+            {/* 4. ABOUT */}
+            <section>
+              <SectionAccent />
+              <h2
+                className="font-display font-bold text-2xl sm:text-3xl mb-6"
+                style={{ color: 'var(--text-primary)' }}
+              >
+                About the Project
+              </h2>
+              <div
+                className="text-fluid-base leading-[1.75] space-y-4"
+                style={{ color: 'var(--text-secondary)' }}
+              >
                 <p>{project.description}</p>
               </div>
             </section>
 
-            {/* 7. "Tantangan" section (Problem -> Solution) */}
-            {(project.challengeProblem || project.challengeSolution) && (
-              <section className="mb-16 rounded-2xl bg-stone-900 p-8 sm:p-12 text-stone-50">
-                <h2 className="mb-8 text-2xl font-bold sm:text-3xl">Tantangan & Solusi</h2>
-                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:gap-12">
-                  <div>
-                    <h3 className="mb-4 text-lg font-semibold text-stone-400">Problem</h3>
-                    <p className="text-stone-300 leading-relaxed">
-                      {project.challengeProblem || 'N/A'}
-                    </p>
-                  </div>
-                  <div>
-                    <h3 className="mb-4 text-lg font-semibold text-[#10B981]">Solution</h3>
-                    <p className="text-stone-300 leading-relaxed">
-                      {project.challengeSolution || 'N/A'}
-                    </p>
-                  </div>
-                </div>
-              </section>
-            )}
-
-            {/* 6. Image Gallery (2-3 screenshot) */}
+            {/* 5. GALLERY */}
             {project.gallery && project.gallery.length > 0 && (
-              <section className="mb-16 space-y-8">
+              <section className="space-y-8">
                 {project.gallery.map((imgSrc, index) => (
-                  <div key={index} className="relative overflow-hidden rounded-2xl bg-stone-200 shadow-sm border border-stone-200/50">
+                  <div
+                    key={index}
+                    className="relative overflow-hidden rounded-2xl shadow-sm transition-all duration-500 hover:shadow-md"
+                    style={{
+                      background: 'var(--bg-secondary)',
+                      border: '1px solid var(--border-subtle)',
+                    }}
+                  >
                     <Image
                       src={imgSrc}
-                      alt={`${project.title} - Screenshot ${index + 1}`}
+                      alt={`${project.title} — Screenshot ${index + 1}`}
                       width={1200}
                       height={675}
                       className="w-full h-auto object-cover"
@@ -180,33 +231,119 @@ export default async function ProjectDetail({ params }: Props) {
                 ))}
               </section>
             )}
+
+            {/* 6. CHALLENGES — Problem / Solution */}
+            {(project.challengeProblem || project.challengeSolution) && (
+              <section
+                className="rounded-2xl p-8 sm:p-12 lg:p-14 relative overflow-hidden"
+                style={{ background: 'var(--bg-dark)' }}
+              >
+                {/* Subtle gradient orb decoration */}
+                <div
+                  className="absolute -top-24 -right-24 w-64 h-64 rounded-full opacity-10"
+                  style={{
+                    background:
+                      'radial-gradient(circle, var(--gemini-purple), transparent 70%)',
+                  }}
+                />
+                <div
+                  className="absolute -bottom-24 -left-24 w-64 h-64 rounded-full opacity-10"
+                  style={{
+                    background:
+                      'radial-gradient(circle, var(--gemini-teal), transparent 70%)',
+                  }}
+                />
+
+                <div className="relative z-10">
+                  <SectionAccent />
+                  <h2
+                    className="font-display font-bold text-2xl sm:text-3xl mb-10 text-white"
+                  >
+                    Challenges &amp; Solutions
+                  </h2>
+                  <div className="grid grid-cols-1 gap-10 sm:grid-cols-2">
+                    <div>
+                      <h3
+                        className="text-xs font-semibold uppercase tracking-widest mb-4"
+                        style={{ color: 'rgba(255,255,255,0.4)' }}
+                      >
+                        Problem
+                      </h3>
+                      <p className="leading-relaxed text-white/75">
+                        {project.challengeProblem || 'N/A'}
+                      </p>
+                    </div>
+                    <div>
+                      <h3
+                        className="text-xs font-semibold uppercase tracking-widest mb-4"
+                        style={{ color: 'var(--blewah)' }}
+                      >
+                        Solution
+                      </h3>
+                      <p className="leading-relaxed text-white/75">
+                        {project.challengeSolution || 'N/A'}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            )}
           </div>
 
+          {/* ── RIGHT COLUMN — Sidebar ── */}
           <aside className="lg:col-span-4">
-            {/* 8. "Hasil Utama" (Key Takeaways) */}
             {project.keyTakeaways && project.keyTakeaways.length > 0 && (
-              <div className="sticky top-24 rounded-2xl border border-stone-200 bg-white p-6 sm:p-8 shadow-sm">
-                <h3 className="mb-6 text-xl font-bold text-stone-900">Key Takeaways</h3>
+              <div
+                className="sticky top-24 rounded-2xl p-6 sm:p-8 shadow-sm"
+                style={{
+                  background: 'var(--bg-card)',
+                  border: '1px solid var(--border-subtle)',
+                }}
+              >
+                <h3
+                  className="font-display font-bold text-lg mb-6"
+                  style={{ color: 'var(--text-primary)' }}
+                >
+                  Key Takeaways
+                </h3>
                 <ul className="space-y-4">
                   {project.keyTakeaways.map((takeaway, index) => (
-                    <li key={index} className="flex items-start gap-3 text-stone-600">
-                      <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-[#10B981]" />
-                      <span className="leading-relaxed">{takeaway}</span>
+                    <li
+                      key={index}
+                      className="flex items-start gap-3 text-sm leading-relaxed"
+                      style={{ color: 'var(--text-secondary)' }}
+                    >
+                      <CheckCircle2
+                        className="mt-0.5 h-4 w-4 shrink-0"
+                        style={{ color: 'var(--blewah)' }}
+                      />
+                      {takeaway}
                     </li>
                   ))}
                 </ul>
 
                 {/* Tech Stack */}
                 {project.techStack && project.techStack.length > 0 && (
-                  <div className="mt-8 border-t border-stone-100 pt-8">
-                    <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-stone-400">
+                  <div
+                    className="mt-8 pt-8"
+                    style={{ borderTop: '1px solid var(--border-subtle)' }}
+                  >
+                    <p
+                      className="text-xs font-semibold uppercase tracking-widest mb-4"
+                      style={{ color: 'var(--text-muted)' }}
+                    >
                       Tech Stack
-                    </h4>
+                    </p>
                     <div className="flex flex-wrap gap-2">
                       {project.techStack.map((tech) => (
                         <span
                           key={tech}
-                          className="rounded-lg bg-stone-100 px-3 py-1.5 text-xs font-medium text-stone-700"
+                          className="rounded-lg px-3 py-1.5 text-xs font-medium transition-all duration-200 tech-pill-hover"
+                          style={{
+                            background: 'var(--bg-secondary)',
+                            color: 'var(--text-secondary)',
+                            border: '1px solid transparent',
+                          }}
                         >
                           {tech}
                         </span>
@@ -215,18 +352,27 @@ export default async function ProjectDetail({ params }: Props) {
                   </div>
                 )}
 
-                {/* 11. Project Links */}
+                {/* Project Links */}
                 {(project.liveUrl || project.repoUrl) && (
-                  <div className="mt-8 border-t border-stone-100 pt-8">
+                  <div
+                    className="mt-8 pt-8 space-y-3"
+                    style={{ borderTop: '1px solid var(--border-subtle)' }}
+                  >
                     {project.liveUrl && (
                       <a
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group flex w-full items-center justify-center gap-2 rounded-xl bg-stone-900 px-6 py-3.5 font-medium text-white transition-all hover:bg-stone-800 hover:shadow-md"
+                        className="group flex items-center justify-center gap-2 w-full rounded-xl px-6 py-3.5 text-sm font-medium transition-all duration-300"
+                        style={{
+                          background: 'var(--bg-dark)',
+                          color: 'var(--text-on-dark)',
+                        }}
                       >
-                        View Live Project
-                        <ExternalLink className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                        <span>View Live Project</span>
+                        <ExternalLink
+                          className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                        />
                       </a>
                     )}
                     {project.repoUrl && !project.liveUrl && (
@@ -234,10 +380,16 @@ export default async function ProjectDetail({ params }: Props) {
                         href={project.repoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group flex w-full items-center justify-center gap-2 rounded-xl bg-stone-900 px-6 py-3.5 font-medium text-white transition-all hover:bg-stone-800 hover:shadow-md"
+                        className="group flex items-center justify-center gap-2 w-full rounded-xl px-6 py-3.5 text-sm font-medium transition-all duration-300"
+                        style={{
+                          background: 'var(--bg-dark)',
+                          color: 'var(--text-on-dark)',
+                        }}
                       >
-                        View Source Code
-                        <ExternalLink className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                        <span>View Source Code</span>
+                        <ExternalLink
+                          className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                        />
                       </a>
                     )}
                   </div>
@@ -245,70 +397,126 @@ export default async function ProjectDetail({ params }: Props) {
               </div>
             )}
           </aside>
-
         </div>
 
-        {/* 10. Testimonial Client (jika ada) */}
-        {project.testimonialId && (
-          <div className="my-24">
-            <ProjectTestimonial testimonialId={project.testimonialId} />
-          </div>
-        )}
-
-        {/* 12. Navigasi: Prev Project | Next Project */}
-        <div className="my-24 flex flex-col justify-between gap-6 border-y border-stone-200 py-12 sm:flex-row sm:items-center">
+        {/* ═════════════════════════════════════════════════════════════════
+            8. PREV / NEXT NAVIGATION
+            ═════════════════════════════════════════════════════════════════ */}
+        <div
+          className="my-28 flex flex-col justify-between gap-8 py-14 sm:flex-row sm:items-center"
+          style={{ borderTop: '1px solid var(--border-subtle)', borderBottom: '1px solid var(--border-subtle)' }}
+        >
           <div className="flex-1">
             {prevProject && (
               <Link
                 href={`/projects/${prevProject.id}`}
-                className="group flex flex-col items-start"
+                className="group flex flex-col items-start gap-1"
               >
-                <span className="mb-2 text-sm font-semibold uppercase tracking-wider text-stone-400 transition-colors group-hover:text-stone-600">
+                <span
+                  className="text-xs font-semibold uppercase tracking-widest transition-colors duration-300"
+                  style={{ color: 'var(--text-muted)' }}
+                >
                   Previous Project
                 </span>
-                <span className="flex items-center gap-3 text-xl font-medium text-stone-900 transition-colors group-hover:text-[#10B981]">
-                  <ArrowLeft className="h-5 w-5 transition-transform group-hover:-translate-x-1" />
+                <span
+                  className="flex items-center gap-3 text-lg sm:text-xl font-medium transition-colors duration-300 group-hover:opacity-70"
+                  style={{ color: 'var(--text-primary)' }}
+                >
+                  <ArrowLeft
+                    className="h-5 w-5 transition-transform duration-300 group-hover:-translate-x-1.5"
+                    style={{ color: 'var(--blewah)' }}
+                  />
                   {prevProject.title}
                 </span>
               </Link>
             )}
           </div>
-          
+
           <div className="flex-1 sm:text-right">
             {nextProject && (
               <Link
                 href={`/projects/${nextProject.id}`}
-                className="group flex flex-col items-start sm:items-end"
+                className="group flex flex-col items-start sm:items-end gap-1"
               >
-                <span className="mb-2 text-sm font-semibold uppercase tracking-wider text-stone-400 transition-colors group-hover:text-stone-600">
+                <span
+                  className="text-xs font-semibold uppercase tracking-widest transition-colors duration-300"
+                  style={{ color: 'var(--text-muted)' }}
+                >
                   Next Project
                 </span>
-                <span className="flex items-center gap-3 text-xl font-medium text-stone-900 transition-colors group-hover:text-[#10B981]">
+                <span
+                  className="flex items-center gap-3 text-lg sm:text-xl font-medium transition-colors duration-300 group-hover:opacity-70"
+                  style={{ color: 'var(--text-primary)' }}
+                >
                   {nextProject.title}
-                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight
+                    className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1.5"
+                    style={{ color: 'var(--blewah)' }}
+                  />
                 </span>
               </Link>
             )}
           </div>
         </div>
 
-        {/* 13. CTA: "Mulai Project Anda" */}
-        <div className="mt-24 rounded-3xl bg-stone-900 px-6 py-16 text-center sm:px-12 lg:px-24">
-          <h2 className="mb-6 text-3xl font-bold text-white sm:text-4xl">
-            Siap Membangun Project Serupa?
-          </h2>
-          <p className="mx-auto mb-10 max-w-2xl text-lg text-stone-400">
-            Mari diskusikan bagaimana kami bisa membantu mewujudkan ide Anda menjadi produk digital yang luar biasa.
-          </p>
+        {/* ═════════════════════════════════════════════════════════════════
+            9. CTA
+            ═════════════════════════════════════════════════════════════════ */}
+        <section
+          className="relative overflow-hidden rounded-3xl px-6 py-20 sm:px-12 lg:px-20 text-center"
+          style={{ background: 'var(--bg-dark)' }}
+        >
+          {/* Subtle gradient orbs */}
+          <div
+            className="absolute -top-32 -right-32 w-80 h-80 rounded-full opacity-[0.07]"
+            style={{
+              background:
+                'radial-gradient(circle, var(--gemini-pink), transparent 70%)',
+            }}
+          />
+          <div
+            className="absolute -bottom-32 -left-32 w-80 h-80 rounded-full opacity-[0.07]"
+            style={{
+              background:
+                'radial-gradient(circle, var(--gemini-blue), transparent 70%)',
+            }}
+          />
+
+          <div className="relative z-10">
+            <h2
+              className="font-display font-bold text-3xl sm:text-4xl text-white mb-5"
+            >
+              Ready to Build Something Similar?
+            </h2>
+            <p className="mx-auto max-w-xl text-fluid-base text-white/50 mb-10 leading-relaxed">
+              Let&apos;s discuss how we can help bring your ideas to life.
+            </p>
+            <Link
+              href="/#contact"
+              className="group inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 font-semibold transition-all duration-300 hover:scale-[1.03]"
+              style={{
+                background: 'var(--bg-card)',
+                color: 'var(--text-primary)',
+                boxShadow: 'var(--shadow-sm)',
+              }}
+            >
+              <span>Start Your Project</span>
+              <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </section>
+
+        {/* ── 10. BACK LINK ── */}
+        <div className="text-center py-16">
           <Link
-            href="/#contact"
-            className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 font-semibold text-stone-900 transition-all hover:scale-105 hover:bg-stone-100 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+            href="/#work"
+            className="group inline-flex items-center gap-2 text-sm font-medium transition-colors duration-300"
+            style={{ color: 'var(--text-muted)' }}
           >
-            Mulai Project Anda
-            <ArrowRight className="ml-2 h-5 w-5" />
+            <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
+            <span>Back to All Projects</span>
           </Link>
         </div>
-
       </article>
     </main>
   );

@@ -14,48 +14,49 @@ export function ProjectTestimonial({ testimonialId }: ProjectTestimonialProps) {
 
   const testimonial = testimonials.find(t => t.id === testimonialId);
 
-  // Jika ID diberikan tapi tidak ditemukan di database, jangan render
   if (!testimonial) return null;
 
   return (
-    <section className="py-24 md:py-32 bg-blue-50/50 dark:bg-blue-900/10 border-y border-blue-100 dark:border-blue-900/30">
-      <div className="container mx-auto px-6">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-col items-center text-center"
-          >
-            <div className="w-16 h-16 bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center mb-10 shadow-sm">
-              <Quote className="w-8 h-8 fill-current" />
+    <section className="py-16 md:py-20 rounded-2xl border px-6"
+      style={{ background: 'var(--bg-secondary)', borderColor: 'var(--border-subtle)' }}>
+      <div className="max-w-4xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col items-center text-center"
+        >
+          <div className="w-12 h-12 rounded-full flex items-center justify-center mb-6"
+            style={{ background: 'var(--blewah)', color: 'white' }}>
+            <Quote className="w-6 h-6" />
+          </div>
+
+          <blockquote className="text-xl md:text-2xl lg:text-3xl font-medium leading-snug mb-10"
+            style={{ color: 'var(--text-primary)' }}>
+            &ldquo;{testimonial.quote}&rdquo;
+          </blockquote>
+
+          <div className="flex items-center gap-4">
+            <div className="relative w-14 h-14 rounded-full overflow-hidden border-2"
+              style={{ borderColor: 'var(--border-medium)' }}>
+              <Image
+                src={testimonial.photo}
+                alt={testimonial.name}
+                fill
+                className="object-cover"
+              />
             </div>
-            
-            <blockquote className="text-2xl md:text-4xl lg:text-5xl font-medium text-gray-900 dark:text-white leading-tight md:leading-tight lg:leading-tight mb-12 tracking-tight">
-              &ldquo;{testimonial.quote}&rdquo;
-            </blockquote>
-            
-            <div className="flex items-center gap-5">
-              <div className="relative w-16 h-16 rounded-full overflow-hidden border-4 border-white dark:border-zinc-800 shadow-md">
-                <Image
-                  src={testimonial.photo}
-                  alt={testimonial.name}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="text-left">
-                <h4 className="font-bold text-gray-900 dark:text-white text-lg">
-                  {testimonial.name}
-                </h4>
-                <p className="text-gray-500 dark:text-gray-400 text-base">
-                  {testimonial.title}, {testimonial.company}
-                </p>
-              </div>
+            <div className="text-left">
+              <h4 className="font-bold text-base" style={{ color: 'var(--text-primary)' }}>
+                {testimonial.name}
+              </h4>
+              <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
+                {testimonial.title}, {testimonial.company}
+              </p>
             </div>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

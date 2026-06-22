@@ -11,7 +11,7 @@ export interface FAQ {
 export const faqs: FAQ[] = [
   {
     id: 'faq-01',
-    question: 'Berapa biaya untuk membuat website di Forza Studio?',
+    question: 'Berapa biaya untuk membuat website di Glare Warden?',
     answer:
       'Biaya pembuatan website sangat bergantung pada kebutuhan dan kompleksitas project Anda. Landing page sederhana biasanya mulai dari Rp 3–8 juta, sementara web app dengan fitur khusus bisa lebih. Kami selalu menyesuaikan solusi dengan budget klien — ceritakan kebutuhan Anda dan kami siapkan penawaran yang tepat.',
     category: 'pricing',
@@ -43,7 +43,7 @@ export const faqs: FAQ[] = [
   },
   {
     id: 'faq-05',
-    question: 'Apakah Forza Studio berpengalaman dengan jenis bisnis saya?',
+    question: 'Apakah Glare Warden berpengalaman dengan jenis bisnis saya?',
     answer:
       'Kami telah membangun website untuk berbagai jenis bisnis — mulai dari startup tech, UMKM, platform edukasi, hingga bisnis e-commerce. Sebelum memulai, kami selalu melakukan riset mendalam tentang industri dan kompetitor Anda untuk memastikan hasilnya relevan dan kompetitif.',
     category: 'general',
@@ -59,7 +59,7 @@ export const faqs: FAQ[] = [
   },
   {
     id: 'faq-07',
-    question: 'Teknologi apa yang Forza Studio gunakan?',
+    question: 'Teknologi apa yang Glare Warden gunakan?',
     answer:
       'Kami menggunakan teknologi modern dan terpercaya: Next.js untuk web app (cepat, SEO-friendly), Tailwind CSS untuk desain yang konsisten, Supabase untuk database, dan hosting di Vercel yang menjamin uptime tinggi. Semua teknologi yang kami pilih fokus pada performa, keamanan, dan kemudahan maintenance jangka panjang.',
     category: 'technical',

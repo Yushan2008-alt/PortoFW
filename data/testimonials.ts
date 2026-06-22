@@ -24,7 +24,7 @@ export const testimonials: Testimonial[] = [
     company: 'Placeholder Company',
     photo: '/images/testimonials/testimonial-01.jpg',
     quote:
-      'Forza Studio membangun website bisnis kami dari nol. Hasilnya melebihi ekspektasi — desainnya profesional dan loading-nya sangat cepat. Dalam 2 minggu setelah launch, kami sudah mendapat 3 inquiries dari website.',
+      'Glare Warden membangun website bisnis kami dari nol. Hasilnya melebihi ekspektasi — desainnya profesional dan loading-nya sangat cepat. Dalam 2 minggu setelah launch, kami sudah mendapat 3 inquiries dari website.',
     linkedInUrl: '',
     projectId: 'ruangteduh',
     featured: true,
@@ -37,7 +37,7 @@ export const testimonials: Testimonial[] = [
     company: 'Placeholder Company 2',
     photo: '/images/testimonials/testimonial-02.jpg',
     quote:
-      'Tim Forza Studio sangat responsif dan profesional. Mereka memahami kebutuhan bisnis kami dengan baik dan menghasilkan website yang benar-benar merepresentasikan brand kami.',
+      'Tim Glare Warden sangat responsif dan profesional. Mereka memahami kebutuhan bisnis kami dengan baik dan menghasilkan website yang benar-benar merepresentasikan brand kami.',
     linkedInUrl: '',
     projectId: 'propvista',
     featured: true,
@@ -50,7 +50,7 @@ export const testimonials: Testimonial[] = [
     company: 'Placeholder Company 3',
     photo: '/images/testimonials/testimonial-03.jpg',
     quote:
-      'Landing page yang dibuat Forza Studio berhasil meningkatkan conversion rate kami secara signifikan. Mereka tidak hanya membuat website yang cantik, tapi juga yang bekerja untuk bisnis.',
+      'Landing page yang dibuat Glare Warden berhasil meningkatkan conversion rate kami secara signifikan. Mereka tidak hanya membuat website yang cantik, tapi juga yang bekerja untuk bisnis.',
     linkedInUrl: '',
     projectId: 'conversion-climb',
     featured: true,

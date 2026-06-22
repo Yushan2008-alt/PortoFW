@@ -3,11 +3,9 @@ import { Footer } from '@/components/layout/Footer';
 import { Hero } from '@/components/sections/Hero';
 import { MetricsTicker } from '@/components/sections/MetricsTicker';
 import { About } from '@/components/sections/About';
-import { ClientLogoWall } from '@/components/sections/ClientLogoWall';
 import { Work } from '@/components/sections/Work';
 import { Services } from '@/components/sections/Services';
 import { TechStack } from '@/components/sections/TechStack';
-import { Testimonials } from '@/components/sections/Testimonials';
 import { FAQ } from '@/components/sections/FAQ';
 import { Contact } from '@/components/sections/Contact';
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
@@ -35,22 +33,12 @@ export default function HomePage() {
 
         <hr className="gradient-divider" />
 
-        {/* 5. Client logo wall — social proof */}
-        <ClientLogoWall />
-
-        <hr className="gradient-divider" />
-
-        {/* 6. Services */}
+        {/* 5. Services */}
         <Services />
 
         <hr className="gradient-divider" />
 
-        {/* 7. Testimonials */}
-        <Testimonials />
-
-        <hr className="gradient-divider" />
-
-        {/* 8. FAQ */}
+        {/* 7. FAQ */}
         <FAQ />
 
         <hr className="gradient-divider" />

@@ -1,5 +1,6 @@
 'use client';
 import { team } from '@/data/team';
+import { site } from '@/data/site';
 import { SmartImage } from '@/components/ui/SmartImage';
 import { motion, useInView } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
@@ -62,7 +63,7 @@ export function About() {
           className="font-display font-bold text-center max-w-4xl mx-auto leading-[1.05] mb-8"
           style={{ fontSize: 'clamp(1.8rem, 5vw, 3.5rem)', letterSpacing: '-0.02em', color: 'var(--text-primary)' }}
         >
-          Tim kecil, <span className="gradient-text">eksekusi besar.</span>
+          <span className="gradient-text">Eksekusi besar.</span>
           <br />
           Tanpa overhead agency.
         </motion.h2>
@@ -75,7 +76,7 @@ export function About() {
           className="text-center max-w-2xl mx-auto leading-relaxed mb-16"
           style={{ fontSize: 'clamp(0.85rem, 1.4vw, 1.05rem)', color: 'var(--text-secondary)' }}
         >
-          Dua orang, satu meja kerja, satu standar. Dari riset, desain, sampai deploy ke production —
+          Dari riset, desain, sampai deploy ke production —
           kami tangani semuanya dengan kualitas yang sama seperti tim in-house, tapi tanpa
           birokrasi dan markup agency.
         </motion.p>
@@ -86,10 +87,10 @@ export function About() {
           style={{ borderColor: 'var(--border-subtle)' }}
         >
           {[
-            { target: 3, suffix: '+', label: 'Projects Built' },
-            { target: 0, suffix: '+', label: 'Happy Clients' },
-            { target: 1,  suffix: '',  label: 'Years Together' },
-          ].map((stat, i) => (
+            { target: parseInt(site.stats.projects) || 0, suffix: '+', label: 'Projects Built' },
+            { target: parseInt(site.stats.clients) || 0, suffix: '+', label: 'Happy Clients' },
+            { target: parseInt(site.stats.years) || 1,  suffix: '', label: 'Years Experience' },
+          ].filter(s => s.target > 0).map((stat, i) => (
             <motion.div
               key={stat.label}
               initial={{ opacity: 0, y: 20 }}

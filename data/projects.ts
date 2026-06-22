@@ -1,15 +1,24 @@
 // NEW: Metric badge displayed on project card (max 3 per project)
 export interface ProjectMetric {
-  label: string; // e.g. "Users", "Conversion Lift", "Load Time"
-  value: string; // e.g. "12.4k+", "+30%", "0.8s"
-  icon?: string; // Optional: Lucide icon name (e.g. "Users", "TrendingUp")
+  label: string;
+  value: string;
+  icon?: string;
 }
 
-// EXTENDED: Project interface — tambah 3 optional field baru
+// Project category for filtering (eloqwnt-style)
+export type ProjectCategory = 'web-design' | 'branding' | 'ux-ui';
+
+export const CATEGORY_LABELS: Record<ProjectCategory, string> = {
+  'web-design': 'Web Design',
+  'branding': 'Branding',
+  'ux-ui': 'UX/UI',
+};
+
 export interface Project {
   id: string;
   title: string;
   category: string;
+  categorySlug: ProjectCategory;
   tagline: string;
   description: string;
   thumbnail: string;
@@ -19,20 +28,18 @@ export interface Project {
   featured: boolean;
   year: number;
   accentColor: string;
-  // --- NEW FIELDS ---
-  metrics?: ProjectMetric[];  // Up to 3 metric badges on card
-  results?: string[];         // Bullet list of outcomes (for case study Phase 2)
-  testimonialId?: string;     // FK → testimonials.ts by id
-  // --- NEW FIELDS untuk Project Detail Page ---
-  challengeProblem?: string;    // Deskripsi masalah (eloqwnt "Problem")
-  challengeSolution?: string;  // Deskripsi solusi (eloqwnt "Solution")
-  keyTakeaways?: string[];     // Key takeaways bullet
-  duration?: string;           // e.g. "3 minggu", "6 minggu"
-  industry?: string;           // e.g. "Health Tech, Indonesia"
-  services?: string[];         // e.g. ["Web Design", "UI/UX"]
-  gallery?: string[];          // Array tambahan gambar screenshot
-  nextProjectId?: string;      // ID project selanjutnya (untuk navigasi)
-  prevProjectId?: string;      // ID project sebelumnya
+  metrics?: ProjectMetric[];
+  results?: string[];
+  testimonialId?: string;
+  challengeProblem?: string;
+  challengeSolution?: string;
+  keyTakeaways?: string[];
+  duration?: string;
+  industry?: string;
+  services?: string[];
+  gallery?: string[];
+  nextProjectId?: string;
+  prevProjectId?: string;
 }
 
 export const projects: Project[] = [
@@ -40,6 +47,7 @@ export const projects: Project[] = [
     id: 'ruangteduh',
     title: 'RuangTeduh',
     category: 'Health Tech · AI Platform',
+    categorySlug: 'web-design',
     tagline: 'Platform kesehatan mental gratis untuk 12.400+ pengguna Indonesia.',
     description:
       'Dari AI companion 24/7 hingga crisis SOS, kami bangun ekosistem kesehatan mental lengkap yang bisa diakses siapa saja, kapan saja.',
@@ -81,6 +89,7 @@ export const projects: Project[] = [
     id: 'conversion-climb',
     title: 'The Conversion Climb',
     category: 'Landing Page · Conversion',
+    categorySlug: 'web-design',
     tagline: 'Landing page yang menggunakan framework-nya sendiri untuk menjual.',
     description:
       'Sales page ebook marketing dengan Awareness Ladder framework. Kami tangani struktur, copy, dan visual dari nol sampai live.',
@@ -122,7 +131,8 @@ export const projects: Project[] = [
     id: 'pkwu-web',
     title: 'Entrepreneurship Web',
     category: 'Web Project',
-    tagline: 'Fondasi awal perjalanan Forza Studio.',
+    categorySlug: 'web-design',
+    tagline: 'Fondasi awal perjalanan Glare Warden.',
     description:
       'Project web kewirausahaan yang jadi titik awal kami belajar membangun untuk dunia nyata.',
     thumbnail: '/images/projects/pkwu.png',
@@ -137,7 +147,7 @@ export const projects: Project[] = [
       { label: 'Year',  value: '2024',       icon: 'Calendar' },
     ],
     results: [
-      'Project pertama Forza Studio yang fully deployed',
+      'Project pertama Glare Warden yang fully deployed',
       'Membangun fondasi pemahaman web development',
     ],
     // testimonialId: undefined — belum ada testimonial untuk project ini
@@ -162,6 +172,7 @@ export const projects: Project[] = [
     id: 'propvista',
     title: 'PropVista',
     category: 'Real Estate · Property Listing',
+    categorySlug: 'web-design',
     tagline: 'Platform pencarian properti terpercaya di Indonesia.',
     description:
       'Dari pencarian rumah impian hingga layanan jual beli, kami menyediakan solusi lengkap untuk kebutuhan properti Anda.',

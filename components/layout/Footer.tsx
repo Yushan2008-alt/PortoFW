@@ -157,10 +157,10 @@ export function Footer() {
         {/* Bottom row */}
         <div className="mt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs" style={{ color: COPY }}>
-            © 2026 Forza Studio. All rights reserved.
+            © 2026 Glare Warden. All rights reserved.
           </p>
           <p className="text-xs" style={{ color: COPY }}>
-            Designed &amp; Built by Forza Studio
+            Designed &amp; Built by Glare Warden
           </p>
         </div>
 

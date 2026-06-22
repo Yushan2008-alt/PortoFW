@@ -98,7 +98,7 @@ export function Hero() {
             className="relative z-10 mt-6 leading-relaxed max-w-2xl mx-auto"
             style={{ fontSize: 'clamp(0.9rem, 1.5vw, 1.1rem)', color: 'var(--text-secondary)' }}
           >
-            Dari landing page hingga web app, Forza Studio membangun
+            Dari landing page hingga web app, Glare Warden membangun
             produk digital yang mengkonversi pengunjung jadi pelanggan.
           </motion.p>
 

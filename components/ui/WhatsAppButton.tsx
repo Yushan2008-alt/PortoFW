@@ -31,7 +31,7 @@ export function WhatsAppButton() {
   // 3. target="_blank" rel="noopener noreferrer" prevents tabnabbing.
   const phone = site.whatsapp.replace(/\D/g, '');
   const message = encodeURIComponent(
-    'Halo Forza Studio, saya ingin konsultasi project.',
+    'Halo Glare Warden, saya ingin konsultasi project.',
   );
   const href = `https://wa.me/${phone}?text=${message}`;
 

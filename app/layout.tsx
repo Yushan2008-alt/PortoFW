@@ -15,13 +15,13 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://forzastudio.dev'),
-  title: 'Forza Studio — Kami Bangun Website Yang Menggerakkan Bisnis',
-  description: 'Dari landing page hingga web app, Forza Studio membangun produk digital yang mengkonversi pengunjung jadi pelanggan.',
+  metadataBase: new URL('https://glarewarden.com'),
+  title: 'Glare Warden — Web Development Agency',
+  description: 'Glare Warden adalah web development agency yang membangun website, web app, dan produk digital yang mengkonversi pengunjung jadi pelanggan.',
   openGraph: {
-    title: 'Forza Studio',
-    description: 'Dari landing page hingga web app, Forza Studio membangun produk digital yang mengkonversi pengunjung jadi pelanggan.',
-    url: 'https://forzastudio.dev',
+    title: 'Glare Warden',
+    description: 'Glare Warden adalah web development agency yang membangun website, web app, dan produk digital yang mengkonversi pengunjung jadi pelanggan.',
+    url: 'https://glarewarden.com',
     images: ['/og-image.png'],
   },
 };

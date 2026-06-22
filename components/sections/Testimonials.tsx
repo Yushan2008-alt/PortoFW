@@ -77,7 +77,7 @@ export function Testimonials() {
             }}
           >
             Kepuasan klien adalah prioritas utama kami. Berikut pengalaman
-            mereka bekerja bersama Forza Studio.
+            mereka bekerja bersama Glare Warden.
           </p>
         </motion.div>
 
