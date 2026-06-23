@@ -1,6 +1,6 @@
-# Forza Studio Portfolio
+# Glare Warden Portfolio
 
-Website portofolio tim Forza Studio.
+Website portofolio Glare Warden — Web Development Agency.
 
 ## Local Development
 ```bash

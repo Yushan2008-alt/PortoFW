@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { projects, CATEGORY_LABELS } from '@/data/projects';
+import { projects } from '@/data/projects';
 import {
   ArrowLeft,
   ArrowRight,
@@ -10,6 +10,7 @@ import {
   Calendar,
   Clock,
   CheckCircle2,
+  Briefcase,
 } from 'lucide-react';
 
 type Props = {
@@ -63,7 +64,7 @@ export default async function ProjectDetail({ params }: Props) {
       {/* ═══════════════════════════════════════════════════════════════════
           1. HERO — Full-bleed image + overlay
          ═══════════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full h-[80vh] min-h-[520px] overflow-hidden">
+      <section className="relative w-full h-[70vh] sm:h-[80vh] min-h-[480px] sm:min-h-[520px] overflow-hidden">
         <Image
           src={project.thumbnail}
           alt={`${project.title} — Hero`}
@@ -82,11 +83,11 @@ export default async function ProjectDetail({ params }: Props) {
           }}
         />
 
-        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-14 lg:p-20">
+        <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8 md:p-14 lg:p-20">
           <div className="max-w-5xl mx-auto">
-            <div className="flex items-center gap-3 mb-5">
+            <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-5 flex-wrap">
               <span
-                className="text-xs font-semibold tracking-widest uppercase rounded-full px-4 py-1.5"
+                className="text-[10px] sm:text-xs font-semibold tracking-widest uppercase rounded-full px-3 sm:px-4 py-1 sm:py-1.5"
                 style={{
                   background: 'rgba(255,255,255,0.08)',
                   color: 'rgba(255,255,255,0.8)',
@@ -94,22 +95,26 @@ export default async function ProjectDetail({ params }: Props) {
                   border: '1px solid rgba(255,255,255,0.1)',
                 }}
               >
-                {CATEGORY_LABELS[project.categorySlug]}
+                {project.category}
               </span>
-              <span className="text-sm text-white/50">&mdash;</span>
+              <span className="text-xs sm:text-sm text-white/50">&mdash;</span>
               <span
-                className="flex items-center gap-1.5 text-sm text-white/60"
+                className="flex items-center gap-1 sm:gap-1.5 text-xs sm:text-sm text-white/60"
               >
-                <Calendar size={14} />
+                <Calendar size={12} className="sm:w-[14px] sm:h-[14px]" />
                 {project.year}
               </span>
             </div>
             <h1
-              className="font-display font-bold text-white leading-[1.05] max-w-4xl text-fluid-3xl md:text-fluid-4xl"
+              className="font-display font-bold text-white leading-[1.05] max-w-4xl"
+              style={{ fontSize: 'clamp(1.75rem, 5vw, 3.5rem)' }}
             >
               {project.title}
             </h1>
-            <p className="mt-5 text-fluid-lg md:text-fluid-xl text-white/60 max-w-2xl leading-relaxed">
+            <p 
+              className="mt-4 sm:mt-5 text-white/60 max-w-2xl leading-relaxed"
+              style={{ fontSize: 'clamp(0.9rem, 2vw, 1.25rem)' }}
+            >
               {project.tagline}
             </p>
           </div>
@@ -131,31 +136,38 @@ export default async function ProjectDetail({ params }: Props) {
           }}
         >
           {[
-            { label: 'Industry', value: project.industry || CATEGORY_LABELS[project.categorySlug] },
+            { 
+              label: 'Industry', 
+              value: project.industry || 'Web Development',
+              icon: <Briefcase size={15} style={{ color: 'var(--text-muted)' }} />
+            },
             {
               label: 'Duration',
-              value: (
-                <span className="flex items-center gap-2">
-                  <Clock size={15} style={{ color: 'var(--text-muted)' }} />
-                  {project.duration || 'N/A'}
-                </span>
-              ),
+              value: project.duration || 'N/A',
+              icon: <Clock size={15} style={{ color: 'var(--text-muted)' }} />
             },
-            { label: 'Services', value: project.services ? project.services.join(', ') : 'Web Design, Development' },
+            { 
+              label: 'Services', 
+              value: project.services?.join(', ') || 'Web Design, Development',
+              icon: null
+            },
           ].map((item, i) => (
             <div
               key={item.label}
-              className="p-6 sm:p-8"
+              className={`
+                p-5 sm:p-6 md:p-8
+                ${i < 2 ? 'border-b sm:border-b-0 sm:border-r' : ''}
+              `}
               style={{
-                borderRight: i < 2 ? '1px solid var(--border-subtle)' : 'none',
-                borderBottom: 'none',
+                borderColor: 'var(--border-subtle)',
               }}
             >
-              <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--text-muted)' }}>
+              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--text-muted)' }}>
                 {item.label}
               </p>
-              <p className="font-medium leading-relaxed" style={{ color: 'var(--text-primary)' }}>
-                {item.value}
+              <p className="font-medium leading-relaxed flex items-center gap-2 text-sm sm:text-base" style={{ color: 'var(--text-primary)' }}>
+                {item.icon}
+                <span className="line-clamp-2">{item.value}</span>
               </p>
             </div>
           ))}
@@ -164,7 +176,7 @@ export default async function ProjectDetail({ params }: Props) {
         {/* ── 3. METRICS ── */}
         {project.metrics && project.metrics.length > 0 && (
           <div
-            className="mt-10 grid grid-cols-3 gap-6 md:gap-10 p-8 sm:p-10 rounded-2xl"
+            className="mt-8 sm:mt-10 grid grid-cols-3 gap-4 sm:gap-6 md:gap-10 p-6 sm:p-8 md:p-10 rounded-2xl"
             style={{
               background: 'var(--bg-secondary)',
               border: '1px solid var(--border-subtle)',
@@ -172,10 +184,19 @@ export default async function ProjectDetail({ params }: Props) {
           >
             {project.metrics.slice(0, 3).map((metric) => (
               <div key={metric.label} className="text-center">
-                <div className="font-display font-bold gradient-text text-3xl md:text-4xl">
+                <div 
+                  className="font-display font-bold gradient-text"
+                  style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)' }}
+                >
                   {metric.value}
                 </div>
-                <div className="mt-2 text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
+                <div 
+                  className="mt-1.5 sm:mt-2 font-semibold uppercase tracking-widest" 
+                  style={{ 
+                    color: 'var(--text-muted)',
+                    fontSize: 'clamp(0.6rem, 1.5vw, 0.75rem)'
+                  }}
+                >
                   {metric.label}
                 </div>
               </div>
@@ -186,10 +207,10 @@ export default async function ProjectDetail({ params }: Props) {
         {/* ═════════════════════════════════════════════════════════════════
             Main content: 2-column grid (sidebar on right)
            ═════════════════════════════════════════════════════════════════ */}
-        <div className="mt-20 grid grid-cols-1 gap-16 lg:grid-cols-12 lg:gap-14">
+        <div className="mt-12 sm:mt-16 md:mt-20 grid grid-cols-1 gap-12 sm:gap-14 md:gap-16 lg:grid-cols-12 lg:gap-14">
 
           {/* ── LEFT COLUMN ── */}
-          <div className="lg:col-span-8 space-y-20">
+          <div className="lg:col-span-8 space-y-12 sm:space-y-16 md:space-y-20">
 
             {/* 4. ABOUT */}
             <section>
@@ -235,7 +256,7 @@ export default async function ProjectDetail({ params }: Props) {
             {/* 6. CHALLENGES — Problem / Solution */}
             {(project.challengeProblem || project.challengeSolution) && (
               <section
-                className="rounded-2xl p-8 sm:p-12 lg:p-14 relative overflow-hidden"
+                className="rounded-2xl p-6 sm:p-10 md:p-12 lg:p-14 relative overflow-hidden"
                 style={{ background: 'var(--bg-dark)' }}
               >
                 {/* Subtle gradient orb decoration */}
@@ -257,30 +278,31 @@ export default async function ProjectDetail({ params }: Props) {
                 <div className="relative z-10">
                   <SectionAccent />
                   <h2
-                    className="font-display font-bold text-2xl sm:text-3xl mb-10 text-white"
+                    className="font-display font-bold mb-8 sm:mb-10 text-white"
+                    style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2rem)' }}
                   >
                     Challenges &amp; Solutions
                   </h2>
-                  <div className="grid grid-cols-1 gap-10 sm:grid-cols-2">
+                  <div className="grid grid-cols-1 gap-8 sm:gap-10 sm:grid-cols-2">
                     <div>
                       <h3
-                        className="text-xs font-semibold uppercase tracking-widest mb-4"
+                        className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest mb-3 sm:mb-4"
                         style={{ color: 'rgba(255,255,255,0.4)' }}
                       >
                         Problem
                       </h3>
-                      <p className="leading-relaxed text-white/75">
+                      <p className="leading-relaxed text-white/75 text-sm sm:text-base">
                         {project.challengeProblem || 'N/A'}
                       </p>
                     </div>
                     <div>
                       <h3
-                        className="text-xs font-semibold uppercase tracking-widest mb-4"
+                        className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest mb-3 sm:mb-4"
                         style={{ color: 'var(--blewah)' }}
                       >
                         Solution
                       </h3>
-                      <p className="leading-relaxed text-white/75">
+                      <p className="leading-relaxed text-white/75 text-sm sm:text-base">
                         {project.challengeSolution || 'N/A'}
                       </p>
                     </div>
@@ -403,7 +425,7 @@ export default async function ProjectDetail({ params }: Props) {
             8. PREV / NEXT NAVIGATION
             ═════════════════════════════════════════════════════════════════ */}
         <div
-          className="my-28 flex flex-col justify-between gap-8 py-14 sm:flex-row sm:items-center"
+          className="my-16 sm:my-20 md:my-28 flex flex-col justify-between gap-6 sm:gap-8 py-10 sm:py-14"
           style={{ borderTop: '1px solid var(--border-subtle)', borderBottom: '1px solid var(--border-subtle)' }}
         >
           <div className="flex-1">
@@ -413,17 +435,20 @@ export default async function ProjectDetail({ params }: Props) {
                 className="group flex flex-col items-start gap-1"
               >
                 <span
-                  className="text-xs font-semibold uppercase tracking-widest transition-colors duration-300"
+                  className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest transition-colors duration-300"
                   style={{ color: 'var(--text-muted)' }}
                 >
                   Previous Project
                 </span>
                 <span
-                  className="flex items-center gap-3 text-lg sm:text-xl font-medium transition-colors duration-300 group-hover:opacity-70"
-                  style={{ color: 'var(--text-primary)' }}
+                  className="flex items-center gap-2 sm:gap-3 font-medium transition-colors duration-300 group-hover:opacity-70"
+                  style={{ 
+                    color: 'var(--text-primary)',
+                    fontSize: 'clamp(1rem, 2.5vw, 1.25rem)'
+                  }}
                 >
                   <ArrowLeft
-                    className="h-5 w-5 transition-transform duration-300 group-hover:-translate-x-1.5"
+                    className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:-translate-x-1.5"
                     style={{ color: 'var(--blewah)' }}
                   />
                   {prevProject.title}
@@ -439,18 +464,21 @@ export default async function ProjectDetail({ params }: Props) {
                 className="group flex flex-col items-start sm:items-end gap-1"
               >
                 <span
-                  className="text-xs font-semibold uppercase tracking-widest transition-colors duration-300"
+                  className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest transition-colors duration-300"
                   style={{ color: 'var(--text-muted)' }}
                 >
                   Next Project
                 </span>
                 <span
-                  className="flex items-center gap-3 text-lg sm:text-xl font-medium transition-colors duration-300 group-hover:opacity-70"
-                  style={{ color: 'var(--text-primary)' }}
+                  className="flex items-center gap-2 sm:gap-3 font-medium transition-colors duration-300 group-hover:opacity-70"
+                  style={{ 
+                    color: 'var(--text-primary)',
+                    fontSize: 'clamp(1rem, 2.5vw, 1.25rem)'
+                  }}
                 >
                   {nextProject.title}
                   <ArrowRight
-                    className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1.5"
+                    className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1.5"
                     style={{ color: 'var(--blewah)' }}
                   />
                 </span>

@@ -35,11 +35,11 @@ export default function ProjectsPage() {
               Our Work
             </span>
             <h1 className="font-display font-bold mt-3"
-              style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)', letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>
+              style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>
               Case Studies
             </h1>
-            <p className="mt-4 max-w-xl" style={{ fontSize: 'clamp(0.85rem, 1.3vw, 1rem)', color: 'var(--text-secondary)' }}>
-              Every project had a business reason behind it. Here&apos;s what we built.
+            <p className="mt-5 max-w-xl leading-relaxed" style={{ fontSize: 'clamp(0.9rem, 1.4vw, 1.1rem)', color: 'var(--text-secondary)' }}>
+              Every project has a story. Here&apos;s what we&apos;ve built and the impact it made.
             </p>
           </motion.div>
 
@@ -48,18 +48,18 @@ export default function ProjectsPage() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.2 }}
-            className="flex flex-wrap gap-2 mt-10"
+            className="flex flex-wrap gap-3 mt-12"
           >
             {FILTERS.map((f) => (
               <button
                 key={f.slug}
                 onClick={() => setActiveFilter(f.slug)}
-                className="px-5 py-2 rounded-full text-sm font-medium transition-all duration-200"
+                className="px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105"
                 style={{
-                  background: activeFilter === f.slug ? 'var(--blewah)' : 'transparent',
+                  background: activeFilter === f.slug ? 'var(--blewah)' : 'var(--bg-card)',
                   color: activeFilter === f.slug ? 'white' : 'var(--text-secondary)',
-                  borderColor: activeFilter === f.slug ? 'var(--blewah)' : 'var(--border-subtle)',
-                  borderWidth: 1,
+                  border: `1px solid ${activeFilter === f.slug ? 'var(--blewah)' : 'var(--border-subtle)'}`,
+                  boxShadow: activeFilter === f.slug ? 'var(--shadow-blewah)' : 'none',
                 }}
               >
                 {f.label}
@@ -79,7 +79,7 @@ export default function ProjectsPage() {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProjects.map((p, i) => (
                 <ProjectCard
                   key={p.id}
@@ -91,8 +91,8 @@ export default function ProjectsPage() {
             </div>
           )}
 
-          <div className="mt-10 text-center text-sm" style={{ color: 'var(--text-muted)' }}>
-            {filteredProjects.length} project{filteredProjects.length !== 1 ? 's' : ''} found
+          <div className="mt-12 text-center text-sm font-medium" style={{ color: 'var(--text-muted)' }}>
+            Showing {filteredProjects.length} project{filteredProjects.length !== 1 ? 's' : ''}
           </div>
         </div>
       </section>
